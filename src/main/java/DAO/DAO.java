@@ -32,7 +32,6 @@ public class DAO {
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
-            
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -74,7 +73,7 @@ public class DAO {
                 case "Estudantes":
                     obj = session.get(Estudantes.class, id);
                     break;
-                
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
                     break;
@@ -101,17 +100,22 @@ public class DAO {
 
             //Start
             transaction = session.beginTransaction();
+            System.out.println("Estado da transaction: " + transaction.getStatus());
 
             //Salvar
             lista = session.createQuery("from " + tabela).list();
+            System.out.println("Estado da sessão: " + session.getStatistics());
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
+            System.out.println("Estado da transaction: " + transaction.getStatus());
 
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+
+            System.out.println("Erro: " + e.getMessage());
         }
         return lista;
     }
@@ -148,5 +152,5 @@ public class DAO {
 
         }
     }
-    
+
 }

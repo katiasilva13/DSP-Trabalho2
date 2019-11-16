@@ -39,12 +39,12 @@ public class Estudantes extends Entidades implements Serializable {
     public long getId() {
         return id;
     }
-    
+
     @Override
     public void setId(long id) {
         this.id = id;
     }
-    
+
     @Override
     public String getNome() {
         return nome;
@@ -55,5 +55,4 @@ public class Estudantes extends Entidades implements Serializable {
         this.nome = nome;
     }
 
-    
 }

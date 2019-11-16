@@ -10,20 +10,26 @@ package Entidades;
  * @author Aula
  */
 public abstract class Entidades {
-    
-    public Entidades(){}
-    
+
+    public Entidades() {
+    }
+
     public abstract long getId();
-    
+
     public abstract void setId(long id);
 
-    public String getNome() { return null; }
+    public String getNome() {
+        return null;
+    }
 
-    public void setNome(String nome) {}
-    
-    public String getEmail() {return null;}
+    public void setNome(String nome) {
+    }
 
-    public void setEmail(String email) { }
+    public String getEmail() {
+        return null;
+    }
 
-    
+    public void setEmail(String email) {
+    }
+
 }
