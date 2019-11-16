@@ -17,10 +17,10 @@ public class Menu {
 
     public static void main(String[] args) {
 
-        //  save("Estudantes");
-        //  save("fufin");
-        // delete("Estudantes", 1);
-        update("Estudantes", 2, "João");
+      //  save("Marina");
+    //    save("Lula");
+    //    delete("Estudantes", 1);
+    //    update("Estudantes", 2, "João");
         getAllTable("Estudantes");
 
     }
