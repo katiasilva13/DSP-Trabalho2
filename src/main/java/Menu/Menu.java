@@ -5,7 +5,8 @@
  */
 package Menu;
 
-import DAO.DAO;
+import DAO.DAOmysql;
+import DAO.DAOpostgres;
 import Entidades.*;
 import java.util.List;
 
@@ -21,12 +22,20 @@ public class Menu {
     //    save("Lula");
     //    delete("Estudantes", 1);
     //    update("Estudantes", 2, "João");
-        getAllTable("Estudantes");
+    //    getAllTable("Estudantes");
+        savePostgres("Marina");
 
     }
 
     private static void save(String nome) {
-        DAO dao = new DAO();
+        DAOmysql dao = new DAOmysql();
+        // Colegios e = new Colegios("Colegio0001");
+        Estudantes e = new Estudantes(nome);
+        dao.Save(e);
+
+    }
+    private static void savePostgres(String nome) {
+        DAOpostgres dao = new DAOpostgres();
         // Colegios e = new Colegios("Colegio0001");
         Estudantes e = new Estudantes(nome);
         dao.Save(e);
@@ -34,7 +43,7 @@ public class Menu {
     }
 
     private static void update(String tabela, long id, String nome) {
-        DAO dao = new DAO();
+        DAOmysql dao = new DAOmysql();
         Estudantes e = null;
         e = dao.getByID(tabela, id);
         e.setNome(nome);
@@ -42,14 +51,14 @@ public class Menu {
     }
 
     private static void getByID(String tabela, long id) {
-        DAO dao = new DAO();
+        DAOmysql dao = new DAOmysql();
         Estudantes e = null;
         e = dao.getByID(tabela, id);
         System.out.println("Estudante: " + e.getNome());
     }
 
     private static void getAllTable(String tabela) {
-        DAO dao = new DAO();
+        DAOmysql dao = new DAOmysql();
         List<Estudantes> lista = dao.getLista(tabela);
 
         for (int i = 0; i < lista.size(); i++) {
@@ -59,7 +68,7 @@ public class Menu {
     }
 
     private static void delete(String tabela, long id) {
-        DAO dao = new DAO();
+        DAOmysql dao = new DAOmysql();
         dao.Delete(tabela, id);
         getAllTable(tabela);
 

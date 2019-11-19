@@ -6,7 +6,7 @@
 package DAO;
 
 import Entidades.*;
-import Hibernate.HibernateUtil;
+import Hibernate.HibernateMySql;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -16,12 +16,12 @@ import org.hibernate.Transaction;
  *
  * @author Aula
  */
-public class DAO {
+public class DAOmysql {
     //Data Acess Object
 
     public void Save(Entidades obj) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
             transaction = session.beginTransaction();
@@ -41,7 +41,7 @@ public class DAO {
 
     public void Update(Estudantes obj) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
             transaction = session.beginTransaction();
@@ -62,7 +62,7 @@ public class DAO {
     public Estudantes getByID(String tabela, long id) {
         Transaction transaction = null;
         Estudantes obj = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
             transaction = session.beginTransaction();
@@ -96,7 +96,7 @@ public class DAO {
     public List<Estudantes> getLista(String tabela) {
         Transaction transaction = null;
         List<Estudantes> lista = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
             transaction = session.beginTransaction();
@@ -123,7 +123,7 @@ public class DAO {
     public void Delete(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
             transaction = session.beginTransaction();

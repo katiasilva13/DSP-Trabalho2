@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Hibernate;
 
-import Entidades.*;
+import Entidades.Estudantes;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -10,10 +15,9 @@ import org.hibernate.service.ServiceRegistry;
 
 /**
  *
- * @author Aula
+ * @author ktia-
  */
-public class HibernateUtil {
-
+public class HibernatePostgres {
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
@@ -25,11 +29,11 @@ public class HibernateUtil {
 
                 //Hibernate settings: Equivalente ao hibernate.cfg.xml
                 Properties setting = new Properties();
-                setting.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-                setting.put(Environment.URL, "jdbc:mysql://localhost:3306/mysql");
-                setting.put(Environment.USER, "root");
+                setting.put(Environment.DRIVER, "org.postgresql.Driver");
+                setting.put(Environment.URL, "jdbc:postgresql://localhost:5432/postgres");
+                setting.put(Environment.USER, "postgres");
                 setting.put(Environment.PASS, "admin");
-                setting.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+                setting.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
 
                 setting.put(Environment.AUTOCOMMIT, "false");
 
@@ -55,5 +59,4 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
-
 }
