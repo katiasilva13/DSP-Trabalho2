@@ -23,18 +23,18 @@ public class Menu {
     //    delete("Estudantes", 1);
     //    update("Estudantes", 2, "João");
     //    getAllTable("Estudantes");
-        savePostgres("Marina");
+     //   savePostgres("Eriks");
 
     }
 
-    private static void save(String nome) {
+    private static void save(String tabela, String nome) {
         DAOmysql dao = new DAOmysql();
         // Colegios e = new Colegios("Colegio0001");
         Estudantes e = new Estudantes(nome);
         dao.Save(e);
 
     }
-    private static void savePostgres(String nome) {
+    private static void savePostgres(String tabela, String nome) {
         DAOpostgres dao = new DAOpostgres();
         // Colegios e = new Colegios("Colegio0001");
         Estudantes e = new Estudantes(nome);
@@ -44,7 +44,7 @@ public class Menu {
 
     private static void update(String tabela, long id, String nome) {
         DAOmysql dao = new DAOmysql();
-        Estudantes e = null;
+        Entidades e = null;
         e = dao.getByID(tabela, id);
         e.setNome(nome);
         dao.Update(e);
@@ -52,14 +52,14 @@ public class Menu {
 
     private static void getByID(String tabela, long id) {
         DAOmysql dao = new DAOmysql();
-        Estudantes e = null;
+        Entidades e = null;
         e = dao.getByID(tabela, id);
         System.out.println("Estudante: " + e.getNome());
     }
 
     private static void getAllTable(String tabela) {
         DAOmysql dao = new DAOmysql();
-        List<Estudantes> lista = dao.getLista(tabela);
+        List<Entidades> lista = dao.getLista(tabela);
 
         for (int i = 0; i < lista.size(); i++) {
             System.out.println("Lista  id: " + lista.get(i).getId() + " Nome: " + lista.get(i).getNome());

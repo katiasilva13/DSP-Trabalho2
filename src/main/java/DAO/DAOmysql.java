@@ -39,7 +39,7 @@ public class DAOmysql {
         }
     }
 
-    public void Update(Estudantes obj) {
+    public void Update(Entidades obj) {
         Transaction transaction = null;
         try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
@@ -59,9 +59,9 @@ public class DAOmysql {
         }
     }
 
-    public Estudantes getByID(String tabela, long id) {
+    public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
-        Estudantes obj = null;
+        Entidades obj = null;
         try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start
@@ -93,9 +93,9 @@ public class DAOmysql {
         return obj;
     }
 
-    public List<Estudantes> getLista(String tabela) {
+    public List<Entidades> getLista(String tabela) {
         Transaction transaction = null;
-        List<Estudantes> lista = null;
+        List<Entidades> lista = null;
         try (Session session = HibernateMySql.getSessionFactory().openSession()) {
 
             //Start

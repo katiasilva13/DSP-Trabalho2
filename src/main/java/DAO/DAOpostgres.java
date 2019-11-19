@@ -40,7 +40,7 @@ public class DAOpostgres {
         }
     }
 
-    public void Update(Estudantes obj) {
+    public void Update(Entidades obj) {
         Transaction transaction = null;
         try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
 
@@ -60,9 +60,9 @@ public class DAOpostgres {
         }
     }
 
-    public Estudantes getByID(String tabela, long id) {
+    public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
-        Estudantes obj = null;
+        Entidades obj = null;
         try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
 
             //Start
@@ -94,9 +94,9 @@ public class DAOpostgres {
         return obj;
     }
 
-    public List<Estudantes> getLista(String tabela) {
+    public List<Entidades> getLista(String tabela) {
         Transaction transaction = null;
-        List<Estudantes> lista = null;
+        List<Entidades> lista = null;
         try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
 
             //Start
