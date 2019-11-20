@@ -18,12 +18,12 @@ public class Menu {
 
     public static void main(String[] args) {
 
-      //  save("Marina");
-    //    save("Lula");
+      //  save("Estudantes","Marina");
+    //    save("Estudantes","Lula");
     //    delete("Estudantes", 1);
     //    update("Estudantes", 2, "João");
     //    getAllTable("Estudantes");
-     //   savePostgres("Eriks");
+     //   savePostgres("Estudantes","Eriks");
 
     }
 
