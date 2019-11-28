@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author Aula
  */
+
 public class Menu {
 
     public static void main(String[] args) {
@@ -28,18 +29,35 @@ public class Menu {
     }
 
     private static void save(String tabela, String nome) {
-        DAOmysql dao = new DAOmysql();
-        // Colegios e = new Colegios("Colegio0001");
-        Estudantes e = new Estudantes(nome);
-        dao.Save(e);
-
+        DAOpostgres dao = new DAOpostgres();
+     //   DAOmysql dao = new DAOmysql();
+   //  List<Entidades> temp = new ArrayList<Entidades>();
+        switch (tabela) {
+                case "Clientes":
+                    Clientes c = new Clientes(nome,"","","","");
+                    dao.Save(c);
+                    break;
+                case "Funcionarios":
+                    Funcionarios f = new Funcionarios(nome,"","","","");
+                    dao.Save(f);
+                    break;
+                case "Produtos":
+                    Produtos p = new Produtos(nome,"","");
+                    dao.Save(p);
+                    break;
+//                case "Vendas":
+//                    Vendas v = new Vendas(nome,"","","","");
+//                    dao.Save(v);
+//                    break;
+                default:
+                    
+        }
+        
     }
     private static void savePostgres(String tabela, String nome) {
-        DAOpostgres dao = new DAOpostgres();
-        // Colegios e = new Colegios("Colegio0001");
+        DAOmysql dao = new DAOmysql();
         Estudantes e = new Estudantes(nome);
         dao.Save(e);
-
     }
 
     private static void update(String tabela, long id, String nome) {

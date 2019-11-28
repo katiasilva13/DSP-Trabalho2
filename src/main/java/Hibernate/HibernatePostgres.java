@@ -5,7 +5,10 @@
  */
 package Hibernate;
 
+import Entidades.Clientes;
 import Entidades.Estudantes;
+import Entidades.Funcionarios;
+import Entidades.Produtos;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -45,7 +48,10 @@ public class HibernatePostgres {
                 config.setProperties(setting);
 
                 //Mapeamento das Classes
-                config.addAnnotatedClass(Estudantes.class);
+                config.addAnnotatedClass(Clientes.class);
+                config.addAnnotatedClass(Funcionarios.class);
+                config.addAnnotatedClass(Produtos.class);
+            //    config.addAnnotatedClass(Vendas.class);
 
                 ServiceRegistry service = new StandardServiceRegistryBuilder()
                         .applySettings(config.getProperties()).build();

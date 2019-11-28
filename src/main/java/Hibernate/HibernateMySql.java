@@ -41,7 +41,10 @@ public class HibernateMySql {
                 config.setProperties(setting);
 
                 //Mapeamento das Classes
-                config.addAnnotatedClass(Estudantes.class);
+                config.addAnnotatedClass(Clientes.class);
+                config.addAnnotatedClass(Funcionarios.class);
+                config.addAnnotatedClass(Produtos.class);
+            //    config.addAnnotatedClass(Vendas.class);
 
                 ServiceRegistry service = new StandardServiceRegistryBuilder()
                         .applySettings(config.getProperties()).build();

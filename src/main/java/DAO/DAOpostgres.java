@@ -5,8 +5,7 @@
  */
 package DAO;
 
-import Entidades.Entidades;
-import Entidades.Estudantes;
+import Entidades.*;
 import Hibernate.HibernatePostgres;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -71,9 +70,21 @@ public class DAOpostgres {
             //Salvar
             switch (tabela) {
 
-                case "Estudantes":
-                    obj = session.get(Estudantes.class, id);
+                case "Clientes":
+                    obj = session.get(Clientes.class, id);
                     break;
+
+                case "Funcionarios":
+                    obj = session.get(Funcionarios.class, id);
+                    break;
+
+                case "Produtos":
+                    obj = session.get(Produtos.class, id);
+                    break;
+
+//                case "Vendas":
+//                    obj = session.get(Vendas.class, id);
+//                    break;
 
                 default:
                     JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
@@ -132,10 +143,26 @@ public class DAOpostgres {
             //Salvar
             switch (tabela) {
 
-                case "Estudantes":
-                    obj = session.get(Estudantes.class, id);
+                case "Clientes":
+                    obj = session.get(Clientes.class, id);
                     session.delete(obj);
                     break;
+                
+                case "Funcionarios":
+                    obj = session.get(Funcionarios.class, id);
+                    session.delete(obj);
+                    break;
+                
+                case "Produtos":
+                    obj = session.get(Produtos.class, id);
+                    session.delete(obj);
+                    break;
+                
+//                case "Vendas":
+//                    obj = session.get(Vendas.class, id);
+//                    session.delete(obj);
+//                    break;
+//                
                 default:
                     JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
                     break;
