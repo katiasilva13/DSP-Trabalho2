@@ -5,10 +5,7 @@
  */
 package Hibernate;
 
-import Entidades.Clientes;
-import Entidades.Estudantes;
-import Entidades.Funcionarios;
-import Entidades.Produtos;
+import Entidades.*;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -21,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
  * @author ktia-
  */
 public class HibernatePostgres {
+
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
@@ -39,10 +37,8 @@ public class HibernatePostgres {
                 setting.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
 
                 setting.put(Environment.AUTOCOMMIT, "false");
-
                 setting.put(Environment.SHOW_SQL, "true");
                 setting.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
                 setting.put(Environment.HBM2DDL_AUTO, "update");
 
                 config.setProperties(setting);
@@ -51,7 +47,7 @@ public class HibernatePostgres {
                 config.addAnnotatedClass(Clientes.class);
                 config.addAnnotatedClass(Funcionarios.class);
                 config.addAnnotatedClass(Produtos.class);
-            //    config.addAnnotatedClass(Vendas.class);
+                config.addAnnotatedClass(Vendas.class);
 
                 ServiceRegistry service = new StandardServiceRegistryBuilder()
                         .applySettings(config.getProperties()).build();

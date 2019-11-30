@@ -25,14 +25,10 @@ public class Produtos extends Entidades implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Produtos() {
-    }
+    @Column(name = "nomeProduto")
+    private String nome;
 
-    public Long getID() {
-        return id;
-    }
-
-    @Column(name = "Fornecedor")
+    @Column(name = "fornecedor")
     private String fornecedor;
 
     @Column(name = "preco")
@@ -41,7 +37,11 @@ public class Produtos extends Entidades implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-    public Produtos(String fornecedor, String preco, String codigo) {
+    public Produtos() {
+    }
+
+    public Produtos(String nome, String fornecedor, String preco, String codigo) {
+        this.nome = nome;
         this.fornecedor = fornecedor;
         this.preco = preco;
         this.codigo = codigo;
@@ -49,12 +49,46 @@ public class Produtos extends Entidades implements Serializable {
 
     @Override
     public long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id;
     }
 
     @Override
     public void setId(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id = id;
+    }
+
+    @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(String fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public String getPreco() {
+        return preco;
+    }
+
+    public void setPreco(String preco) {
+        this.preco = preco;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
 }

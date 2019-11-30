@@ -9,6 +9,6 @@ package Gerenciar;
  *
  * @author ktia-
  */
-public class Vender {
+public class GerenciarVendas {
     
 }

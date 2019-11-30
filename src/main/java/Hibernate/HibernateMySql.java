@@ -32,10 +32,8 @@ public class HibernateMySql {
                 setting.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
 
                 setting.put(Environment.AUTOCOMMIT, "false");
-
                 setting.put(Environment.SHOW_SQL, "true");
                 setting.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
                 setting.put(Environment.HBM2DDL_AUTO, "update");
 
                 config.setProperties(setting);
@@ -44,7 +42,7 @@ public class HibernateMySql {
                 config.addAnnotatedClass(Clientes.class);
                 config.addAnnotatedClass(Funcionarios.class);
                 config.addAnnotatedClass(Produtos.class);
-            //    config.addAnnotatedClass(Vendas.class);
+                config.addAnnotatedClass(Vendas.class);
 
                 ServiceRegistry service = new StandardServiceRegistryBuilder()
                         .applySettings(config.getProperties()).build();

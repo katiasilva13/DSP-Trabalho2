@@ -5,8 +5,7 @@
  */
 package Menu;
 
-import DAO.DAOmysql;
-import DAO.DAOpostgres;
+import DAO.*;
 import Entidades.*;
 import java.util.List;
 
@@ -14,49 +13,50 @@ import java.util.List;
  *
  * @author Aula
  */
-
 public class Menu {
 
     public static void main(String[] args) {
 
-      //  save("Estudantes","Marina");
-    //    save("Estudantes","Lula");
-    //    delete("Estudantes", 1);
-    //    update("Estudantes", 2, "João");
-    //    getAllTable("Estudantes");
-     //   savePostgres("Estudantes","Eriks");
-
-    }
-
-    private static void save(String tabela, String nome) {
-        DAOpostgres dao = new DAOpostgres();
-     //   DAOmysql dao = new DAOmysql();
-   //  List<Entidades> temp = new ArrayList<Entidades>();
-        switch (tabela) {
-                case "Clientes":
-                    Clientes c = new Clientes(nome,"","","","");
-                    dao.Save(c);
-                    break;
-                case "Funcionarios":
-                    Funcionarios f = new Funcionarios(nome,"","","","");
-                    dao.Save(f);
-                    break;
-                case "Produtos":
-                    Produtos p = new Produtos(nome,"","");
-                    dao.Save(p);
-                    break;
-//                case "Vendas":
-//                    Vendas v = new Vendas(nome,"","","","");
-//                    dao.Save(v);
-//                    break;
-                default:
-                    
-        }
+        //  save("Estudantes","Marina");
+        //    save("Estudantes","Lula");
+        //    delete("Estudantes", 1);
+        //    update("Estudantes", 2, "João");
+        //    getAllTable("Estudantes");
+        //   savePostgres("Estudantes","Eriks");
+        //   List<Entidades> temp = new ArrayList<Entidades>();
         
     }
-    private static void savePostgres(String tabela, String nome) {
+
+    private void save(String tabela, String col1, String col2, String col3, String col4, String col5) {
+        DAOpostgres daoPsql = new DAOpostgres();
+        //   DAOmysql daoMsql = new DAOmysql();
+
+        switch (tabela) {
+            case "Clientes":
+                Clientes c = new Clientes(col1, "", "", "", "");
+                daoPsql.Save(c);
+                break;
+            case "Funcionarios":
+                Funcionarios f = new Funcionarios(col1, "", "", "", "");
+                daoPsql.Save(f);
+                break;
+            case "Produtos":
+                Produtos p = new Produtos(col1, "", "", "");
+                daoPsql.Save(p);
+                break;
+            case "Vendas":
+                Vendas v = new Vendas(col1, "", "", "", "");
+                daoPsql.Save(v);
+                break;
+            default:
+
+        }
+
+    }
+
+    private static void banco(String tabela, String col1, String col2, String col3, String col4, String col5) {
         DAOmysql dao = new DAOmysql();
-        Estudantes e = new Estudantes(nome);
+        Estudantes e = new Estudantes(col1);
         dao.Save(e);
     }
 
@@ -86,8 +86,8 @@ public class Menu {
     }
 
     private static void delete(String tabela, long id) {
-        DAOmysql dao = new DAOmysql();
-        dao.Delete(tabela, id);
+        DAOmysql mysqlCon = new DAOmysql();
+        mysqlCon.Delete(tabela, id);
         getAllTable(tabela);
 
     }

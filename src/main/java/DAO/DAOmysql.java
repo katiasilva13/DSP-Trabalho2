@@ -16,7 +16,7 @@ import org.hibernate.Transaction;
  *
  * @author Aula
  */
-public class DAOmysql {
+public class DAOmysql{
     //Data Acess Object
 
     public void Save(Entidades obj) {
@@ -59,6 +59,55 @@ public class DAOmysql {
         }
     }
 
+    public void Delete(String tabela, long id) {
+        Transaction transaction = null;
+        Entidades obj = null;
+        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+
+            //Start
+            transaction = session.beginTransaction();
+
+            //Salvar
+            switch (tabela) {
+
+                case "Clientes":
+                    obj = session.get(Clientes.class, id);
+                    session.delete(obj);
+                    break;
+
+                case "Funcionarios":
+                    obj = session.get(Funcionarios.class, id);
+                    session.delete(obj);
+                    break;
+
+                case "Produtos":
+                    obj = session.get(Produtos.class, id);
+                    session.delete(obj);
+                    break;
+
+                case "Vendas":
+                    obj = session.get(Vendas.class, id);
+                    session.delete(obj);
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
+                    break;
+
+            }
+
+            //Comitar / gravar no banco e finalizar
+            transaction.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+        }
+    }
+
     public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
@@ -73,19 +122,19 @@ public class DAOmysql {
                 case "Clientes":
                     obj = session.get(Clientes.class, id);
                     break;
-                    
+
                 case "Funcionarios":
                     obj = session.get(Funcionarios.class, id);
                     break;
-                    
+
                 case "Produtos":
                     obj = session.get(Produtos.class, id);
                     break;
-                    
-//                case "Vendas":
-//                    obj = session.get(Vendas.class, id);
-//                    break;
-//                
+
+                case "Vendas":
+                    obj = session.get(Vendas.class, id);
+                    break;
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
                     break;
@@ -130,55 +179,6 @@ public class DAOmysql {
             System.out.println("Erro: " + e.getMessage());
         }
         return lista;
-    }
-
-    public void Delete(String tabela, long id) {
-        Transaction transaction = null;
-        Entidades obj = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
-
-            //Start
-            transaction = session.beginTransaction();
-
-            //Salvar
-            switch (tabela) {
-
-                case "Clientes":
-                    obj = session.get(Clientes.class, id);
-                    session.delete(obj);
-                    break;
-                    
-                case "Funcionarios":
-                    obj = session.get(Funcionarios.class, id);
-                    session.delete(obj);
-                    break;
-                    
-                case "Produtos":
-                    obj = session.get(Produtos.class, id);
-                    session.delete(obj);
-                    break;
-                    
-//                case "Vendas":
-//                    obj = session.get(Vendas.class, id);
-//                    session.delete(obj);
-//                    break;
-//                    
-                default:
-                    JOptionPane.showMessageDialog(null, "Opção invalida!!!\n Verifique: nome da Tabela");
-                    break;
-
-            }
-
-            //Comitar / gravar no banco e finalizar
-            transaction.commit();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-
-        }
     }
 
 }

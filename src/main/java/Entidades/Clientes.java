@@ -19,26 +19,37 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clientes")
-public class Clientes extends Entidades implements Serializable  {
+public class Clientes extends Entidades implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nome")
+    @Column(name = "nomeCliente")
     private String nome;
-    
-    @Column(name = "ultimo Nome")
+
+    @Column(name = "ultimoNome")
     private String ultimoNome;
-    
+
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "cel")
     private String cel;
-    
+
     @Column(name = "cpf")
     private String cpf;
+
+    public Clientes() {
+    }
+
+    public Clientes(String nome, String ultimoNome, String email, String cel, String cpf) {
+        this.nome = nome;
+        this.ultimoNome = ultimoNome;
+        this.email = email;
+        this.cel = cel;
+        this.cpf = cpf;
+    }
 
     @Override
     public long getId() {
@@ -94,13 +105,4 @@ public class Clientes extends Entidades implements Serializable  {
         this.cpf = cpf;
     }
 
-    public Clientes(String nome, String ultimoNome, String email, String cel, String cpf) {
-        this.nome = nome;
-        this.ultimoNome = ultimoNome;
-        this.email = email;
-        this.cel = cel;
-        this.cpf = cpf;
-    }
-    
-    
 }

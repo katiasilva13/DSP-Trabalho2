@@ -25,21 +25,20 @@ public class Funcionarios extends Entidades implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nome")
+    @Column(name = "nomeFuncionario")
     private String nome;
-    
+
     @Column(name = "ultimo Nome")
     private String ultimoNome;
-    
+
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "cel")
     private String cel;
 
     public Funcionarios() {
     }
-  
 
     public Funcionarios(String nome, String nome0, String ultimoNome, String email, String cel) {
         this.nome = nome;
@@ -47,10 +46,6 @@ public class Funcionarios extends Entidades implements Serializable {
         this.email = email;
         this.cel = cel;
     }
-
-    
-
-    
 
     @Override
     public long getId() {
