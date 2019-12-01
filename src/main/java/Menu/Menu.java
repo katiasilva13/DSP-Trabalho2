@@ -33,11 +33,15 @@ public class Menu {
         col3 = "";
         col4 = "";
         col5 = "";
-        //  crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
-        //  System.out.println(crud.getByID(dbAtual, tabela, id) );
+      //  crud.save(dbAtual, tabela, "Kátia", "Silva", "katia@silva.com", col4, col5);
+     //    crud.save(dbAtual, tabela, "Daiela", "Silva", col3, col4, col5);
+       //   crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
+      crud.update(dbAtual, tabela, 2, "Daniela", "Estevão", "viviane@estevao.com", col4, col5); 
+     //  System.out.println(crud.getByID(dbAtual, tabela, id) );
         //  System.out.println("line 38 Menu, id true?"+crud.checkID(dbAtual, tabela, id));        
         //crud.getAllTable(dbAtual, tabela);
-        crud.update(dbAtual, tabela, 1, "Daniela", "Estevão", "viviane@estevao.com", col4, col5);
+      
+        
         
     }
     //TODO metodo update e delete em CRUD

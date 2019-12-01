@@ -51,21 +51,25 @@ public class CRUD {
             switch (tabela) {
                 //Cliente(nome, ultimoNome, email, cel, cpf);
                 case "Clientes":
+                    dbBackup(false, tabela);
                     Clientes c = new Clientes(col1, col2, col3, col4, col5);
                     daoPsql.Save(c);
                     break;
                 //Funcionario(nome, ultimoNome, email, cel); 
                 case "Funcionarios":
+                    dbBackup(false, tabela);
                     Funcionarios f = new Funcionarios(col1, col2, col3, col4);
                     daoPsql.Save(f);
                     break;
                 //Produto(nome, fornecedor, preco, codigo);
                 case "Produtos":
+                    dbBackup(false, tabela);
                     Produtos p = new Produtos(col1, col2, col3, col4);
                     daoPsql.Save(p);
                     break;
                 //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);  
                 case "Vendas":
+                    dbBackup(false, tabela);
                     Vendas v = new Vendas(col1, col2, col3, col4, col5);
                     daoPsql.Save(v);
                     break;
@@ -124,14 +128,12 @@ public class CRUD {
                 switch (tabela) {
                     case "Clientes":
                         Clientes c;
-                        System.out.println("line124 CRUD");
                         c = (Clientes) daoPsql.getByID(tabela, id);
                         registro = "\nCliente: \nNome:" + c.getNome()
                                 + "\nSobrenome:" + c.getUltimoNome()
                                 + "\nEmail:" + c.getEmail()
                                 + "\nCelular:" + c.getCel() + "\nCPF:" + c.getCpf();
                         break;
-
                     case "Funcionarios":
                         Funcionarios f;
                         f = (Funcionarios) daoPsql.getByID(tabela, id);
@@ -284,7 +286,7 @@ public class CRUD {
                     switch (tabela) {
                         //Cliente(nome, ultimoNome, email, cel, cpf);
                         case "Clientes":
-                            Clientes c = (Clientes) daoMsql.getByID(tabela, id);                            
+                            Clientes c = (Clientes) daoMsql.getByID(tabela, id);
                             c.setNome(col1);
                             c.setUltimoNome(col2);
                             c.setEmail(col3);
@@ -292,7 +294,7 @@ public class CRUD {
                             c.setCpf(col5);
                             daoMsql.Update(c);
                             break;
-                            //Funcionario(nome, ultimoNome, email, cel);    
+                        //Funcionario(nome, ultimoNome, email, cel);    
                         case "Funcionarios":
                             Funcionarios f = (Funcionarios) daoMsql.getByID(tabela, id);
                             f.setNome(col1);
@@ -301,7 +303,7 @@ public class CRUD {
                             f.setCel(col4);
                             daoMsql.Update(f);
                             break;
-                            //Produto(nome, fornecedor, preco, codigo);
+                        //Produto(nome, fornecedor, preco, codigo);
                         case "Produtos":
                             Produtos p = (Produtos) daoMsql.getByID(tabela, id);
                             p.setNome(col1);
@@ -310,7 +312,7 @@ public class CRUD {
                             p.setCodigo(col4);
                             daoMsql.Update(p);
                             break;
-                            //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+                        //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                         case "Vendas":
                             Vendas v = (Vendas) daoMsql.getByID(tabela, id);
                             v.setNomeProduto(col1);
@@ -329,12 +331,13 @@ public class CRUD {
                     //Cliente(nome, ultimoNome, email, cel, cpf);
                     case "Clientes":
                         Clientes c = (Clientes) daoPsql.getByID(tabela, id);
-                        if(!checkID(false, tabela, id)){
-                            save(false, tabela, c.getNome(), c.getUltimoNome(), 
+                        if (!checkID(false, tabela, id)) {
+                            save(false, tabela, c.getNome(), c.getUltimoNome(),
                                     c.getEmail(), c.getCel(), c.getCpf());
-                        }else
-                            update(false, tabela, c.getId(),c.getNome(), 
-                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());                    
+                        } else {
+                            update(false, tabela, c.getId(), c.getNome(),
+                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
+                        }
                         c.setNome(col1);
                         c.setUltimoNome(col2);
                         c.setEmail(col3);
@@ -342,45 +345,48 @@ public class CRUD {
                         c.setCpf(col5);
                         daoPsql.Update(c);
                         break;
-                        //Funcionario(nome, ultimoNome, email, cel);    
+                    //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
                         Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
-                        if(!checkID(false, tabela, id)){
+                        if (!checkID(false, tabela, id)) {
                             save(false, tabela, f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(),"");
-                        }else
-                            update(false, tabela, f.getId(),f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(),"");                          
+                                    f.getEmail(), f.getCel(), "");
+                        } else {
+                            update(false, tabela, f.getId(), f.getNome(), f.getUltimoNome(),
+                                    f.getEmail(), f.getCel(), "");
+                        }
                         f.setNome(col1);
                         f.setUltimoNome(col2);
                         f.setEmail(col3);
                         f.setCel(col4);
                         daoPsql.Update(f);
                         break;
-                        //Produto(nome, fornecedor, preco, codigo);
+                    //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
                         Produtos p = (Produtos) daoPsql.getByID(tabela, id);
-                        if(!checkID(false, tabela, id)){
+                        if (!checkID(false, tabela, id)) {
                             save(false, tabela, p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(),"");
-                        }else
+                                    p.getPreco(), p.getCodigo(), "");
+                        } else {
                             update(false, tabela, p.getId(), p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(),"");                         
+                                    p.getPreco(), p.getCodigo(), "");
+                        }
                         p.setNome(col1);
                         p.setFornecedor(col2);
                         p.setPreco(col3);
                         p.setCodigo(col4);
                         daoPsql.Update(p);
                         break;
-                        //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                     case "Vendas":
                         Vendas v = (Vendas) daoPsql.getByID(tabela, id);
-                        if(!checkID(false, tabela, id)){
+                        if (!checkID(false, tabela, id)) {
                             save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
-                                v.getPrecoProduto(),v.getCodigoProduto());
-                        }else
-                            update(false, tabela, v.getId(),v.getNomeProduto(), v.getNomeCliente(), 
-                                    v.getNomeFuncionario(), v.getPrecoProduto(),v.getCodigoProduto());
+                                    v.getPrecoProduto(), v.getCodigoProduto());
+                        } else {
+                            update(false, tabela, v.getId(), v.getNomeProduto(), v.getNomeCliente(),
+                                    v.getNomeFuncionario(), v.getPrecoProduto(), v.getCodigoProduto());
+                        }
                         v.setNomeProduto(col1);
                         v.setNomeCliente(col2);
                         v.setNomeFuncionario(col3);
@@ -397,6 +403,62 @@ public class CRUD {
         }
 
     }
-    
-    
+
+    public long lastID(boolean dbAtual, String tabela) {
+        boolean quit = false;
+        long id = 0;
+        registro = "";
+        do {
+            id++;
+            registro = getByID(dbAtual, tabela, id);
+            if (!"Ops! Algo deu errado.\nErro: null".equalsIgnoreCase(registro)
+                    && !"Ops! Algo deu errado.".equalsIgnoreCase(registro)) {
+                quit = false;
+            } else {
+                quit = true;
+            }
+        } while (!quit);
+
+        return --id;
+    }
+
+    public void dbBackup(boolean dbAtual, String tabela) {
+        try {
+            if (!checkID(dbAtual, tabela, lastID(true, tabela)) && checkID(true, tabela, lastID(true, tabela))) {
+                DAOpostgres daoPsql = new DAOpostgres();
+                switch (tabela) {
+                    //Cliente(nome, ultimoNome, email, cel, cpf);
+                    case "Clientes":
+                        Clientes c = (Clientes) daoPsql.getByID(tabela, lastID(true, tabela));
+                        save(false, tabela, c.getNome(), c.getUltimoNome(),
+                                c.getEmail(), c.getCel(), c.getCpf());
+                        break;
+                    //Funcionario(nome, ultimoNome, email, cel);    
+                    case "Funcionarios":
+                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, lastID(true, tabela));
+                        save(false, tabela, f.getNome(), f.getUltimoNome(),
+                                f.getEmail(), f.getCel(), "");
+                        break;
+                    //Produto(nome, fornecedor, preco, codigo);
+                    case "Produtos":
+                        Produtos p = (Produtos) daoPsql.getByID(tabela, lastID(true, tabela));
+                        save(false, tabela, p.getNome(), p.getFornecedor(),
+                                p.getPreco(), p.getCodigo(), "");
+                        break;
+                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+                    case "Vendas":
+                        Vendas v = (Vendas) daoPsql.getByID(tabela, lastID(true, tabela));
+                        save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
+                                v.getPrecoProduto(), v.getCodigoProduto());
+                        break;
+                    default:
+                        System.out.println("Ops! Algo deu errado.");
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+        }
+
+    }
 }
