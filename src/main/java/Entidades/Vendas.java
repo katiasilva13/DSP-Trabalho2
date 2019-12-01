@@ -8,9 +8,15 @@ package Entidades;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
@@ -22,17 +28,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "vendas")
-@SecondaryTables(value = {
-    @SecondaryTable(name = "produtos", pkJoinColumns = @PrimaryKeyJoinColumn(name = "nomeProduto", referencedColumnName = "id"))
-    ,
-        @SecondaryTable(name = "clientes", pkJoinColumns = @PrimaryKeyJoinColumn(name = "nomeCliente", referencedColumnName = "id"))
-    ,
-        @SecondaryTable(name = "funcionarios", pkJoinColumns = @PrimaryKeyJoinColumn(name = "nomeFuncionario", referencedColumnName = "id"))
-    ,
-        @SecondaryTable(name = "produtos", pkJoinColumns = @PrimaryKeyJoinColumn(name = "preco", referencedColumnName = "id"))
-    ,
-        @SecondaryTable(name = "produtos", pkJoinColumns = @PrimaryKeyJoinColumn(name = "codigo", referencedColumnName = "id"))
-})
 public class Vendas extends Entidades implements Serializable {
 
     @Id
@@ -114,5 +109,4 @@ public class Vendas extends Entidades implements Serializable {
     public void setCodigoProduto(String codigoProduto) {
         this.codigoProduto = codigoProduto;
     }
-
 }

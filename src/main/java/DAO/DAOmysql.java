@@ -16,7 +16,7 @@ import org.hibernate.Transaction;
  *
  * @author Aula
  */
-public class DAOmysql{
+public class DAOmysql {
     //Data Acess Object
 
     public void Save(Entidades obj) {

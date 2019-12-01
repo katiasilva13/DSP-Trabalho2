@@ -7,6 +7,9 @@ package Menu;
 
 import DAO.*;
 import Entidades.*;
+import Gerenciar.*;
+import Telas.*;
+import Hibernate.*;
 import java.util.List;
 
 /**
@@ -16,49 +19,29 @@ import java.util.List;
 public class Menu {
 
     public static void main(String[] args) {
-
-        //  save("Estudantes","Marina");
-        //    save("Estudantes","Lula");
-        //    delete("Estudantes", 1);
-        //    update("Estudantes", 2, "João");
-        //    getAllTable("Estudantes");
-        //   savePostgres("Estudantes","Eriks");
-        //   List<Entidades> temp = new ArrayList<Entidades>();
-        
-    }
-
-    private void save(String tabela, String col1, String col2, String col3, String col4, String col5) {
-        DAOpostgres daoPsql = new DAOpostgres();
-        //   DAOmysql daoMsql = new DAOmysql();
-
-        switch (tabela) {
-            case "Clientes":
-                Clientes c = new Clientes(col1, "", "", "", "");
-                daoPsql.Save(c);
-                break;
-            case "Funcionarios":
-                Funcionarios f = new Funcionarios(col1, "", "", "", "");
-                daoPsql.Save(f);
-                break;
-            case "Produtos":
-                Produtos p = new Produtos(col1, "", "", "");
-                daoPsql.Save(p);
-                break;
-            case "Vendas":
-                Vendas v = new Vendas(col1, "", "", "", "");
-                daoPsql.Save(v);
-                break;
-            default:
-
-        }
+        CRUD crud = new CRUD();
+        boolean dbAtual;
+        long id;
+        String tabela;
+        String col1, col2, col3, col4, col5;
+        //Produto(nome, fornecedor, preco, codigo);
+        //Funcionario(nome, ultimoNome, email, cel);
+        //Cliente(nome, ultimoNome, email, cel, cpf);
+        //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);   
+        dbAtual = true;
+        id = 1;
+        tabela = "Funcionarios";
+        col1 = "";
+        col2 = "";
+        col3 = "";
+        col4 = "";
+        col5 = "";
+        //  crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
+        //  crud.getByID(dbAtual, tabela, id);
+        crud.getAllTable(dbAtual, tabela);
 
     }
-
-    private static void banco(String tabela, String col1, String col2, String col3, String col4, String col5) {
-        DAOmysql dao = new DAOmysql();
-        Estudantes e = new Estudantes(col1);
-        dao.Save(e);
-    }
+    //TODO metodo update e delete em CRUD
 
     private static void update(String tabela, long id, String nome) {
         DAOmysql dao = new DAOmysql();
@@ -68,27 +51,11 @@ public class Menu {
         dao.Update(e);
     }
 
-    private static void getByID(String tabela, long id) {
-        DAOmysql dao = new DAOmysql();
-        Entidades e = null;
-        e = dao.getByID(tabela, id);
-        System.out.println("Estudante: " + e.getNome());
-    }
-
-    private static void getAllTable(String tabela) {
-        DAOmysql dao = new DAOmysql();
-        List<Entidades> lista = dao.getLista(tabela);
-
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println("Lista  id: " + lista.get(i).getId() + " Nome: " + lista.get(i).getNome());
-        }
-
-    }
-
-    private static void delete(String tabela, long id) {
+    private static void delete(boolean dbAtual, String tabela, long id) {
         DAOmysql mysqlCon = new DAOmysql();
         mysqlCon.Delete(tabela, id);
-        getAllTable(tabela);
+        CRUD crud = new CRUD();
+        crud.getAllTable(dbAtual, tabela);
 
     }
 

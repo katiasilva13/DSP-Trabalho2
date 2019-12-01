@@ -23,9 +23,9 @@ public class Clientes extends Entidades implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+     long id;
 
-    @Column(name = "nomeCliente")
+    @Column(name = "nome")
     private String nome;
 
     @Column(name = "ultimoNome")

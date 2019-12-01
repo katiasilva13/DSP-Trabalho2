@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 /**
@@ -25,10 +27,10 @@ public class Funcionarios extends Entidades implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nomeFuncionario")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "ultimo Nome")
+    @Column(name = "ultimoNome")
     private String ultimoNome;
 
     @Column(name = "email")
@@ -40,7 +42,7 @@ public class Funcionarios extends Entidades implements Serializable {
     public Funcionarios() {
     }
 
-    public Funcionarios(String nome, String nome0, String ultimoNome, String email, String cel) {
+    public Funcionarios(String nome, String ultimoNome, String email, String cel) {
         this.nome = nome;
         this.ultimoNome = ultimoNome;
         this.email = email;
