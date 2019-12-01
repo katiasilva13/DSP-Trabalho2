@@ -461,4 +461,83 @@ public class CRUD {
         }
 
     }
+
+    public void delete(boolean dbAtual, String tabela, long id) {
+        CRUD crud = new CRUD();
+        //   DAOmysql daoMsql = new DAOmysql();
+        //    daoMsql.Delete(tabela, id);        
+        //  crud.getAllTable(dbAtual, tabela);
+        if (!crud.checkID(dbAtual, tabela, id)) {
+            System.out.println("Ops! Algo deu errado.");
+        } else {
+            try {
+                if (!dbAtual) {
+                    DAOmysql daoMsql = new DAOmysql();
+                    daoMsql.Delete(tabela, id);
+                    crud.getAllTable(dbAtual, tabela);
+                }
+                DAOpostgres daoPsql = new DAOpostgres();
+                switch (tabela) {
+                    //Cliente(nome, ultimoNome, email, cel, cpf);
+                    case "Clientes":
+                        Clientes c = (Clientes) daoPsql.getByID(tabela, id);
+                        if (!checkID(false, tabela, id)) {
+                            save(false, tabela, c.getNome(), c.getUltimoNome(),
+                                    c.getEmail(), c.getCel(), c.getCpf());
+                        } else {
+                            update(false, tabela, c.getId(), c.getNome(),
+                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
+                        }
+                        daoPsql.Delete(tabela, id);
+                        crud.getAllTable(dbAtual, tabela);
+                        break;
+                    //Funcionario(nome, ultimoNome, email, cel);    
+                    case "Funcionarios":
+                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
+                        if (!checkID(false, tabela, id)) {
+                            save(false, tabela, f.getNome(), f.getUltimoNome(),
+                                    f.getEmail(), f.getCel(), "");
+                        } else {
+                            update(false, tabela, f.getId(), f.getNome(), f.getUltimoNome(),
+                                    f.getEmail(), f.getCel(), "");
+                        }
+                        daoPsql.Delete(tabela, id);
+                        crud.getAllTable(dbAtual, tabela);
+                        break;
+                    //Produto(nome, fornecedor, preco, codigo);
+                    case "Produtos":
+                        Produtos p = (Produtos) daoPsql.getByID(tabela, id);
+                        if (!checkID(false, tabela, id)) {
+                            save(false, tabela, p.getNome(), p.getFornecedor(),
+                                    p.getPreco(), p.getCodigo(), "");
+                        } else {
+                            update(false, tabela, p.getId(), p.getNome(), p.getFornecedor(),
+                                    p.getPreco(), p.getCodigo(), "");
+                        }
+                        daoPsql.Delete(tabela, id);
+                        crud.getAllTable(dbAtual, tabela);
+                        break;
+                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+                    case "Vendas":
+                        Vendas v = (Vendas) daoPsql.getByID(tabela, id);
+                        if (!checkID(false, tabela, id)) {
+                            save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
+                                    v.getPrecoProduto(), v.getCodigoProduto());
+                        } else {
+                            update(false, tabela, v.getId(), v.getNomeProduto(), v.getNomeCliente(),
+                                    v.getNomeFuncionario(), v.getPrecoProduto(), v.getCodigoProduto());
+                        }
+                        daoPsql.Delete(tabela, id);
+                        crud.getAllTable(dbAtual, tabela);
+                        break;
+                    default:
+                        System.out.println("Erro");
+                }
+            } catch (Exception e) {
+                System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+            }
+        }
+
+    }
+
 }

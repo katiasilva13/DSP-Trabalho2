@@ -23,7 +23,7 @@ public class Clientes extends Entidades implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     long id;
+    long id;
 
     @Column(name = "nome")
     private String nome;
