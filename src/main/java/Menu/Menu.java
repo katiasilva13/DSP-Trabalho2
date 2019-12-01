@@ -8,9 +8,6 @@ package Menu;
 import DAO.*;
 import Entidades.*;
 import Gerenciar.*;
-import Telas.*;
-import Hibernate.*;
-import java.util.List;
 
 /**
  *
