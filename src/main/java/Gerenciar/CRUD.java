@@ -120,7 +120,7 @@ public class CRUD {
                                 + "\nCodigo produto:" + v.getCodigoProduto();
                         break;
                     default:
-                        registro = "Ops! Algo deu errado.";
+                        registro = "Ops! Algo deu errado. CRUD.getById: linha 123";
                         break;
                 }
             } else {
@@ -160,12 +160,12 @@ public class CRUD {
                                 + "\nCodigo produto:" + v.getCodigoProduto();
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado.");
+                        System.out.println("Ops! Algo deu errado. CRUD.getById: linha 163");
                         break;
                 }
             }
         } catch (Exception e) {
-            registro = "Ops! Algo deu errado.\nErro: " + e.getMessage();
+            registro = "Ops! Algo deu errado. CRUD.getById: linha 168\nErro: " + e.getMessage();
         }
         return registro;
 
@@ -272,13 +272,125 @@ public class CRUD {
         return idCheck;
 
     }
+    
+    
+    
+//    public String update(boolean dbAtual, String tabela, long id, String col1, String col2,
+//            String col3, String col4, String col5) {
+//        
+//        CRUD crud = new CRUD();
+//        if (!checkID(dbAtual, tabela, id)) {
+//            System.out.println("Ops! Algo deu errado.");
+//        } else  {
+//            
+//            try {
+//                if (false == dbAtual) {
+//                    DAOmysql daoMsql = new DAOmysql();
+//                    switch (tabela) {
+//                        //Cliente(nome, ultimoNome, email, cel, cpf);
+//                        case "Clientes":
+//                            Clientes c = (Clientes) daoMsql.getByID(tabela, id);
+//                            c.setNome(col1);
+//                            c.setUltimoNome(col2);
+//                            c.setEmail(col3);
+//                            c.setCel(col4);
+//                            c.setCpf(col5);
+//                            daoMsql.Update(c);
+//                            break;
+//                        //Funcionario(nome, ultimoNome, email, cel);    
+//                        case "Funcionarios":
+//                            Funcionarios f = (Funcionarios) daoMsql.getByID(tabela, id);
+//                            f.setNome(col1);
+//                            f.setUltimoNome(col2);
+//                            f.setEmail(col3);
+//                            f.setCel(col4);
+//                            daoMsql.Update(f);
+//                            break;
+//                        //Produto(nome, fornecedor, preco, codigo);
+//                        case "Produtos":
+//                            Produtos p = (Produtos) daoMsql.getByID(tabela, id);
+//                            p.setNome(col1);
+//                            p.setFornecedor(col2);
+//                            p.setPreco(col3);
+//                            p.setCodigo(col4);
+//                            daoMsql.Update(p);
+//                            break;
+//                        //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+//                        case "Vendas":
+//                            Vendas v = (Vendas) daoMsql.getByID(tabela, id);
+//                            v.setNomeProduto(col1);
+//                            v.setNomeCliente(col2);
+//                            v.setNomeFuncionario(col3);
+//                            v.setPrecoProduto(col4);
+//                            v.setCodigoProduto(col5);
+//                            daoMsql.Update(v);
+//                            break;
+//                        default:
+//                            System.out.println("Erro");
+//                    }
+//                }
+//                DAOpostgres daoPsql = new DAOpostgres();
+//                switch (tabela) {
+//                    //Cliente(nome, ultimoNome, email, cel, cpf);
+//                    case "Clientes":
+//                        dbBackup(true, tabela);
+//                        Clientes c2 = (Clientes) daoPsql.getByID(tabela, id);
+//                        c2.setNome(col1);
+//                        c2.setUltimoNome(col2);
+//                        c2.setEmail(col3);
+//                        c2.setCel(col4);
+//                        c2.setCpf(col5);                        
+//                        daoPsql.Update(c2);
+//                        break;
+//                    //Funcionario(nome, ultimoNome, email, cel);    
+//                    case "Funcionarios":
+//                        dbBackup(false, tabela);
+//                        Funcionarios f2 = (Funcionarios) daoPsql.getByID(tabela, id);
+//                        f2.setNome(col1);
+//                        f2.setUltimoNome(col2);
+//                        f2.setEmail(col3);
+//                        f2.setCel(col4);
+//                        daoPsql.Update(f2);
+//                        break;
+//                    //Produto(nome, fornecedor, preco, codigo);
+//                    case "Produtos":
+//                        dbBackup(false, tabela);
+//                        Produtos p2 = (Produtos) daoPsql.getByID(tabela, id);
+//                        p2.setNome(col1);
+//                        p2.setFornecedor(col2);
+//                        p2.setPreco(col3);
+//                        p2.setCodigo(col4);
+//                        daoPsql.Update(p2);
+//                        break;
+//                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+//                    case "Vendas":
+//                        dbBackup(false, tabela);
+//                        Vendas v2 = (Vendas) daoPsql.getByID(tabela, id);
+//                        v2.setNomeProduto(col1);
+//                        v2.setNomeCliente(col2);
+//                        v2.setNomeFuncionario(col3);
+//                        v2.setPrecoProduto(col4);
+//                        v2.setCodigoProduto(col5);
+//                        daoPsql.Update(v2);
+//                        break;
+//                    default:
+//                        System.out.println("Erro");
+//                }
+//            } catch (Exception e) {
+//                System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+//            }
+//        }
+//        return "Atualizado";
+//    }
+
+    
 
     public String update(boolean dbAtual, String tabela, long id, String col1, String col2,
             String col3, String col4, String col5) {
         
         CRUD crud = new CRUD();
-        if (!crud.checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado.");
+        if (!checkID(dbAtual, tabela, id)) {
+            System.out.println("Ops! Algo deu errado. CRUD.update: linha398");
         } else {
             try {
                 if (false == dbAtual) {
@@ -398,12 +510,91 @@ public class CRUD {
                         System.out.println("Erro");
                 }
             } catch (Exception e) {
-                System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.update: linha 518\nErro: " + e.getMessage());
             }
         }
         return "Atualizado";
     }
 
+    
+    
+//    public void dbBackup(boolean dbAtual, String tabela) {
+//        try {
+//            if (!checkID(dbAtual, tabela, lastID(true, tabela)) && checkID(true, tabela, lastID(true, tabela))) {
+//                DAOpostgres daoPsql = new DAOpostgres();
+//                switch (tabela) {
+//                    //Cliente(nome, ultimoNome, email, cel, cpf);
+//                    case "Clientes":
+//                        Clientes c = (Clientes) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        save(false, tabela, c.getNome(), c.getUltimoNome(),
+//                                c.getEmail(), c.getCel(), c.getCpf());
+//                        break;
+//                    //Funcionario(nome, ultimoNome, email, cel);    
+//                    case "Funcionarios":
+//                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        save(false, tabela, f.getNome(), f.getUltimoNome(),
+//                                f.getEmail(), f.getCel(), "");
+//                        break;
+//                    //Produto(nome, fornecedor, preco, codigo);
+//                    case "Produtos":
+//                        Produtos p = (Produtos) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        save(false, tabela, p.getNome(), p.getFornecedor(),
+//                                p.getPreco(), p.getCodigo(), "");
+//                        break;
+//                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+//                    case "Vendas":
+//                        Vendas v = (Vendas) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
+//                                v.getPrecoProduto(), v.getCodigoProduto());
+//                        break;
+//                    default:
+//                        System.out.println("Ops! Algo deu errado.");
+//                        break;
+//                }
+//            } else if (checkID(dbAtual, tabela, lastID(true, tabela))){
+//                DAOpostgres daoPsql = new DAOpostgres();
+//                switch (tabela) {                    
+//                    //Cliente(nome, ultimoNome, email, cel, cpf);
+//                    case "Clientes":
+//                        Clientes c = (Clientes) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        System.out.println("LINHA 569");
+//                        System.out.println("id "+ c.getId()+" nome: "+c.getNome()+" sobrenome "
+//       +c.getUltimoNome()+" email "+c.getEmail()+" cel:"+c.getCel()+" cpf "+c.getCpf());
+//
+//                        update(false, tabela, c.getId(), c.getNome(),
+//                                   c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
+//                        break;
+//                    //Funcionario(nome, ultimoNome, email, cel);    
+//                    case "Funcionarios":
+//                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        update(false, tabela, f.getId(), f.getNome(), f.getUltimoNome(),
+//                                    f.getEmail(), f.getCel(), "");
+//                        break;
+//                    //Produto(nome, fornecedor, preco, codigo);
+//                    case "Produtos":
+//                        Produtos p = (Produtos) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        update(false, tabela, p.getId(), p.getNome(), p.getFornecedor(),
+//                                    p.getPreco(), p.getCodigo(), "");
+//                        break;
+//                    //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
+//                    case "Vendas":
+//                        Vendas v = (Vendas) daoPsql.getByID(tabela, lastID(true, tabela));
+//                        update(false, tabela, v.getId(), v.getNomeProduto(), v.getNomeCliente(),
+//                                    v.getNomeFuncionario(), v.getPrecoProduto(), v.getCodigoProduto());
+//                        break;
+//                    default:
+//                        System.out.println("Ops! Algo deu errado.");
+//                        break;
+//                }
+//            }
+//
+//
+//        } catch (Exception e) {
+//            System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+//        }
+//
+//    }
+    
     public long lastID(boolean dbAtual, String tabela) {
 
         long id = 0;
@@ -497,12 +688,12 @@ public class CRUD {
                                 v.getPrecoProduto(), v.getCodigoProduto());
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado.");
+                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 700");
                         break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 705\nErro: " + e.getMessage());
         }
 
     }
@@ -510,7 +701,7 @@ public class CRUD {
     public String delete(boolean dbAtual, String tabela, long id) {
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado.");
+            System.out.println("Ops! Algo deu errado. CRUD.delete: linha 713");
         } else {
             try {
                 if (!dbAtual) {
@@ -576,7 +767,7 @@ public class CRUD {
                         System.out.println("Erro");
                 }
             } catch (Exception e) {
-                System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.delete: linha 779\nErro: " + e.getMessage());
             }
         }
         return "Excluído com sucesso";

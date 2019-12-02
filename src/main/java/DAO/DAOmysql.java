@@ -51,15 +51,17 @@ public class DAOmysql {
         //   try (Session session = HibernateMySql.getSessionFactory().openSession()) {
         try {
             //Start
+            transaction.setTimeout(5);
             transaction = session.beginTransaction();
 
             //Salvar
             session.saveOrUpdate(obj);
-            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            System.err.println("Session: " + session.getStatistics() + " Transaction: " + transaction.getStatus());
 //            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
+
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -126,8 +128,8 @@ public class DAOmysql {
     public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        Session session = HibernateMySql.getSessionFactory().openSession();
-        try {
+  //      Session session = HibernateMySql.getSessionFactory().openSession();
+        try (Session session = HibernateMySql.getSessionFactory().openSession()){
 
             //Start
             transaction = session.beginTransaction();
@@ -167,9 +169,10 @@ public class DAOmysql {
             if (transaction != null) {
                 transaction.rollback();
             }
-        } finally {
-            session.close();
-        }
+        } 
+//        finally {
+//            session.close();
+//        }
         return obj;
     }
 
