@@ -82,7 +82,7 @@ public class CRUD {
 
     public String getByID(boolean dbAtual, String tabela, long id) {
         try {
-            if (!dbAtual) {
+            if (false == dbAtual) {
                 DAOmysql daoMsql = new DAOmysql();
                 switch (tabela) {
                     case "Clientes":
@@ -171,7 +171,8 @@ public class CRUD {
 
     }
 
-    public void getAllTable(boolean dbAtual, String tabela) {
+    public long getAllTable(boolean dbAtual, String tabela) {
+        long id = 0;
         if (!dbAtual) {
             DAOmysql daoMsql = new DAOmysql();
             switch (tabela) {
@@ -184,6 +185,7 @@ public class CRUD {
                                 + "\nCelular:" + listaC.get(i).getCel()
                                 + "\nCPF:" + listaC.get(i).getCpf());
                     }
+                    id = listaC.size();
                     break;
                 case "Funcionarios":
                     List<Entidades> listaF = daoMsql.getLista(tabela);
@@ -193,6 +195,7 @@ public class CRUD {
                                 + "\nEmail:" + listaF.get(i).getEmail()
                                 + "\nCelular:" + listaF.get(i).getCel());
                     }
+                    id = listaF.size();
                     break;
                 case "Produtos":
                     List<Entidades> listaP = daoMsql.getLista(tabela);
@@ -202,6 +205,7 @@ public class CRUD {
                                 + "\nPreco produto:" + listaP.get(i).getPreco()
                                 + "\nCodigo produto:" + listaP.get(i).getCodigo());
                     }
+                    id = listaP.size();
                     break;
                 case "Vendas":
                     List<Entidades> listaV = daoMsql.getLista(tabela);
@@ -212,6 +216,7 @@ public class CRUD {
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
                                 + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
                     }
+                    id = listaV.size();
                     break;
             }
         } else {
@@ -226,6 +231,7 @@ public class CRUD {
                                 + "\nCelular:" + listaC.get(i).getCel()
                                 + "\nCPF:" + listaC.get(i).getCpf());
                     }
+                    id = listaC.size();
                     break;
                 case "Funcionarios":
                     List<Entidades> listaF = daoPsql.getLista(tabela);
@@ -235,6 +241,7 @@ public class CRUD {
                                 + "\nEmail:" + listaF.get(i).getEmail()
                                 + "\nCelular:" + listaF.get(i).getCel());
                     }
+                    id = listaF.size();
                     break;
                 case "Produtos":
                     List<Entidades> listaP = daoPsql.getLista(tabela);
@@ -244,6 +251,7 @@ public class CRUD {
                                 + "\nPreco produto:" + listaP.get(i).getPreco()
                                 + "\nCodigo produto:" + listaP.get(i).getCodigo());
                     }
+                    id = listaP.size();
                     break;
                 case "Vendas":
                     List<Entidades> listaV = daoPsql.getLista(tabela);
@@ -254,14 +262,17 @@ public class CRUD {
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
                                 + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
                     }
+                    id = listaV.size();
                     break;
             }
         }
+        id++;
+        return id;
 
     }
 
     public boolean checkID(boolean dbAtual, String tabela, long id) {
-        boolean idCheck = false;
+        boolean idCheck;
         if (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado.\nErro: null")) {
             idCheck = false;
         } else if (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado.")) {
@@ -275,13 +286,12 @@ public class CRUD {
 
     public void update(boolean dbAtual, String tabela, long id, String col1, String col2,
             String col3, String col4, String col5) {
-
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
             System.out.println("Ops! Algo deu errado.");
         } else {
             try {
-                if (!dbAtual) {
+                if (false == dbAtual) {
                     DAOmysql daoMsql = new DAOmysql();
                     switch (tabela) {
                         //Cliente(nome, ultimoNome, email, cel, cpf);
@@ -405,20 +415,22 @@ public class CRUD {
     }
 
     public long lastID(boolean dbAtual, String tabela) {
-        boolean quit = false;
-        long id = 0;
-        registro = "";
-        do {
-            id++;
-            registro = getByID(dbAtual, tabela, id);
-            if (!"Ops! Algo deu errado.\nErro: null".equalsIgnoreCase(registro)
-                    && !"Ops! Algo deu errado.".equalsIgnoreCase(registro)) {
-                quit = false;
-            } else {
-                quit = true;
-            }
-        } while (!quit);
 
+        long id = getAllTable(dbAtual, tabela);
+
+//        boolean quit = false;        
+//        long id = 0;
+//        registro = "";
+//        do {
+//            id++;
+//            registro = getByID(dbAtual, tabela, id);
+//            if (!"Ops! Algo deu errado.\nErro: null".equalsIgnoreCase(registro)
+//                    && !"Ops! Algo deu errado.".equalsIgnoreCase(registro)) {
+//                quit = false;
+//            } else {
+//                quit = true;
+//            }
+//        } while (!quit);
         return --id;
     }
 
@@ -464,9 +476,6 @@ public class CRUD {
 
     public void delete(boolean dbAtual, String tabela, long id) {
         CRUD crud = new CRUD();
-        //   DAOmysql daoMsql = new DAOmysql();
-        //    daoMsql.Delete(tabela, id);        
-        //  crud.getAllTable(dbAtual, tabela);
         if (!crud.checkID(dbAtual, tabela, id)) {
             System.out.println("Ops! Algo deu errado.");
         } else {

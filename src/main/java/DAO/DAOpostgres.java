@@ -9,6 +9,7 @@ import Entidades.*;
 import Hibernate.HibernatePostgres;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,48 +22,55 @@ public class DAOpostgres {
 
     public void Save(Entidades obj) {
         Transaction transaction = null;
-        try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
+        Session session = HibernatePostgres.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
 
             //Salvar
             session.save(obj);
-
+            session.flush();
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public void Update(Entidades obj) {
         Transaction transaction = null;
-        try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
-
+        Session session = HibernatePostgres.getSessionFactory().openSession();
+        try {
             //Start
             transaction = session.beginTransaction();
 
             //Salvar
             session.saveOrUpdate(obj);
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public void Delete(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
+        Session session = HibernatePostgres.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -96,6 +104,7 @@ public class DAOpostgres {
 
             }
 
+            session.flush();
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
@@ -105,13 +114,17 @@ public class DAOpostgres {
                 transaction.rollback();
             }
 
+        } finally {
+            session.close();
         }
+
     }
 
     public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
+        Session session = HibernatePostgres.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -140,7 +153,7 @@ public class DAOpostgres {
                     break;
 
             }
-
+            session.flush();
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
@@ -150,6 +163,8 @@ public class DAOpostgres {
                 transaction.rollback();
             }
 
+        } finally {
+            session.close();
         }
         return obj;
     }
@@ -157,7 +172,8 @@ public class DAOpostgres {
     public List<Entidades> getLista(String tabela) {
         Transaction transaction = null;
         List<Entidades> lista = null;
-        try (Session session = HibernatePostgres.getSessionFactory().openSession()) {
+        Session session = HibernatePostgres.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -166,6 +182,7 @@ public class DAOpostgres {
             //Salvar
             lista = session.createQuery("from " + tabela).list();
             System.out.println("Estado da sessão: " + session.getStatistics());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -175,8 +192,9 @@ public class DAOpostgres {
             if (transaction != null) {
                 transaction.rollback();
             }
-
             System.out.println("Erro: " + e.getMessage());
+        } finally {
+            session.close();
         }
         return lista;
     }

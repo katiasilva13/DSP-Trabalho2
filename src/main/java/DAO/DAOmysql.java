@@ -9,6 +9,7 @@ import Entidades.*;
 import Hibernate.HibernateMySql;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,13 +22,16 @@ public class DAOmysql {
 
     public void Save(Entidades obj) {
         Transaction transaction = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
 
             //Salvar
             session.save(obj);
+            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -36,33 +40,40 @@ public class DAOmysql {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public void Update(Entidades obj) {
         Transaction transaction = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
-
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        //   try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+        try {
             //Start
             transaction = session.beginTransaction();
 
             //Salvar
             session.saveOrUpdate(obj);
+            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
-
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
     public void Delete(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -95,6 +106,8 @@ public class DAOmysql {
                     break;
 
             }
+            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -105,13 +118,16 @@ public class DAOmysql {
                 transaction.rollback();
             }
 
+        } finally {
+            session.close();
         }
     }
 
     public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -140,6 +156,8 @@ public class DAOmysql {
                     break;
 
             }
+            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -149,7 +167,8 @@ public class DAOmysql {
             if (transaction != null) {
                 transaction.rollback();
             }
-
+        } finally {
+            session.close();
         }
         return obj;
     }
@@ -157,7 +176,8 @@ public class DAOmysql {
     public List<Entidades> getLista(String tabela) {
         Transaction transaction = null;
         List<Entidades> lista = null;
-        try (Session session = HibernateMySql.getSessionFactory().openSession()) {
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        try {
 
             //Start
             transaction = session.beginTransaction();
@@ -166,17 +186,21 @@ public class DAOmysql {
             //Salvar
             lista = session.createQuery("from " + tabela).list();
             System.out.println("Estado da sessão: " + session.getStatistics());
+            System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
+            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
             System.out.println("Estado da transaction: " + transaction.getStatus());
 
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
 
             System.out.println("Erro: " + e.getMessage());
+        } finally {
+            session.close();
         }
         return lista;
     }

@@ -34,11 +34,12 @@ public class Menu {
         col4 = "";
         col5 = "";
 
-        // crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
-        //  crud.update(false, tabela, id, col1, col2, "col3, col4, col5); 
+      //  crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
+      //  crud.update(false, tabela, 1, "Eriks", "Henrique", "eriks@henrique", "89870000", "10203098"); 
         // crud.delete(dbAtual, tabela, id);
         //  System.out.println(crud.getByID(dbAtual, tabela, id) );       
-        //crud.getAllTable(dbAtual, tabela);   
+        //crud.getAllTable(dbAtual, tabela);
+       // System.out.println("last id:"+crud.lastID(dbAtual, tabela));
     }
 
 }
