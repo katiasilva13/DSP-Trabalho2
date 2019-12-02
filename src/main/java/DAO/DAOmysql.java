@@ -56,7 +56,7 @@ public class DAOmysql {
             //Salvar
             session.saveOrUpdate(obj);
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            session.flush();
+//            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -107,7 +107,7 @@ public class DAOmysql {
 
             }
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            session.flush();
+            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -157,11 +157,11 @@ public class DAOmysql {
 
             }
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            session.flush();
+            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
-
+//session.close();
         } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
@@ -187,7 +187,7 @@ public class DAOmysql {
             lista = session.createQuery("from " + tabela).list();
             System.out.println("Estado da sessão: " + session.getStatistics());
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            session.flush();
+            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();

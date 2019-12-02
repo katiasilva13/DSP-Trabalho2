@@ -35,7 +35,7 @@ public class Menu {
         col5 = "";
 
       //  crud.save(dbAtual, tabela, col1, col2, col3, col4, col5);
-      //  crud.update(false, tabela, 1, "Eriks", "Henrique", "eriks@henrique", "89870000", "10203098"); 
+       crud.update(true, tabela, 1, "Eriks", "Henrique", "eriks@henrique", "89870000", "32393502"); 
         // crud.delete(dbAtual, tabela, id);
         //  System.out.println(crud.getByID(dbAtual, tabela, id) );       
         //crud.getAllTable(dbAtual, tabela);

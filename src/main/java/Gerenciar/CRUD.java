@@ -17,7 +17,7 @@ public class CRUD {
 
     String registro = "";
 
-    public void save(boolean dbAtual, String tabela, String col1, String col2,
+    public String save(boolean dbAtual, String tabela, String col1, String col2,
             String col3, String col4, String col5) {
 
         if (!dbAtual) {
@@ -77,7 +77,7 @@ public class CRUD {
                     System.out.println("Erro!");
             }
         }
-
+        return "Salvo com sucesso";
     }
 
     public String getByID(boolean dbAtual, String tabela, long id) {
@@ -171,8 +171,7 @@ public class CRUD {
 
     }
 
-    public long getAllTable(boolean dbAtual, String tabela) {
-        long id = 0;
+    public void getAllTable(boolean dbAtual, String tabela) {
         if (!dbAtual) {
             DAOmysql daoMsql = new DAOmysql();
             switch (tabela) {
@@ -185,7 +184,6 @@ public class CRUD {
                                 + "\nCelular:" + listaC.get(i).getCel()
                                 + "\nCPF:" + listaC.get(i).getCpf());
                     }
-                    id = listaC.size();
                     break;
                 case "Funcionarios":
                     List<Entidades> listaF = daoMsql.getLista(tabela);
@@ -195,7 +193,6 @@ public class CRUD {
                                 + "\nEmail:" + listaF.get(i).getEmail()
                                 + "\nCelular:" + listaF.get(i).getCel());
                     }
-                    id = listaF.size();
                     break;
                 case "Produtos":
                     List<Entidades> listaP = daoMsql.getLista(tabela);
@@ -205,7 +202,6 @@ public class CRUD {
                                 + "\nPreco produto:" + listaP.get(i).getPreco()
                                 + "\nCodigo produto:" + listaP.get(i).getCodigo());
                     }
-                    id = listaP.size();
                     break;
                 case "Vendas":
                     List<Entidades> listaV = daoMsql.getLista(tabela);
@@ -216,7 +212,6 @@ public class CRUD {
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
                                 + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
                     }
-                    id = listaV.size();
                     break;
             }
         } else {
@@ -231,7 +226,6 @@ public class CRUD {
                                 + "\nCelular:" + listaC.get(i).getCel()
                                 + "\nCPF:" + listaC.get(i).getCpf());
                     }
-                    id = listaC.size();
                     break;
                 case "Funcionarios":
                     List<Entidades> listaF = daoPsql.getLista(tabela);
@@ -241,7 +235,6 @@ public class CRUD {
                                 + "\nEmail:" + listaF.get(i).getEmail()
                                 + "\nCelular:" + listaF.get(i).getCel());
                     }
-                    id = listaF.size();
                     break;
                 case "Produtos":
                     List<Entidades> listaP = daoPsql.getLista(tabela);
@@ -251,7 +244,6 @@ public class CRUD {
                                 + "\nPreco produto:" + listaP.get(i).getPreco()
                                 + "\nCodigo produto:" + listaP.get(i).getCodigo());
                     }
-                    id = listaP.size();
                     break;
                 case "Vendas":
                     List<Entidades> listaV = daoPsql.getLista(tabela);
@@ -262,12 +254,9 @@ public class CRUD {
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
                                 + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
                     }
-                    id = listaV.size();
                     break;
             }
         }
-        id++;
-        return id;
 
     }
 
@@ -284,8 +273,9 @@ public class CRUD {
 
     }
 
-    public void update(boolean dbAtual, String tabela, long id, String col1, String col2,
+    public String update(boolean dbAtual, String tabela, long id, String col1, String col2,
             String col3, String col4, String col5) {
+        
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
             System.out.println("Ops! Algo deu errado.");
@@ -345,14 +335,14 @@ public class CRUD {
                             save(false, tabela, c.getNome(), c.getUltimoNome(),
                                     c.getEmail(), c.getCel(), c.getCpf());
                         } else {
-                            update(false, tabela, c.getId(), c.getNome(),
+                            update(false, tabela, id, c.getNome(),
                                     c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
                         }
                         c.setNome(col1);
                         c.setUltimoNome(col2);
                         c.setEmail(col3);
                         c.setCel(col4);
-                        c.setCpf(col5);
+                        c.setCpf(col5);                        
                         daoPsql.Update(c);
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
@@ -411,27 +401,70 @@ public class CRUD {
                 System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
             }
         }
-
+        return "Atualizado";
     }
 
     public long lastID(boolean dbAtual, String tabela) {
 
-        long id = getAllTable(dbAtual, tabela);
-
-//        boolean quit = false;        
-//        long id = 0;
-//        registro = "";
-//        do {
-//            id++;
-//            registro = getByID(dbAtual, tabela, id);
-//            if (!"Ops! Algo deu errado.\nErro: null".equalsIgnoreCase(registro)
-//                    && !"Ops! Algo deu errado.".equalsIgnoreCase(registro)) {
-//                quit = false;
-//            } else {
-//                quit = true;
-//            }
-//        } while (!quit);
-        return --id;
+        long id = 0;
+        if (false == dbAtual) {
+            DAOmysql daoMsql = new DAOmysql();
+            switch (tabela) {
+                case "Clientes":
+                    List<Entidades> listaC = daoMsql.getLista(tabela);
+                    for (int i = 0; i < listaC.size(); i++) {
+                        id = listaC.get(i).getId();
+                    }
+                    break;
+                case "Funcionarios":
+                    List<Entidades> listaF = daoMsql.getLista(tabela);
+                    for (int i = 0; i < listaF.size(); i++) {
+                        id = listaF.get(i).getId();
+                    }
+                    break;
+                case "Produtos":
+                    List<Entidades> listaP = daoMsql.getLista(tabela);
+                    for (int i = 0; i < listaP.size(); i++) {
+                        id = listaP.get(i).getId();
+                    }
+                    break;
+                case "Vendas":
+                    List<Entidades> listaV = daoMsql.getLista(tabela);
+                    for (int i = 0; i < listaV.size(); i++) {
+                        id = listaV.get(i).getId();
+                    }
+                    break;
+            }
+        } else {
+            DAOpostgres daoPsql = new DAOpostgres();
+            switch (tabela) {
+                case "Clientes":
+                    List<Entidades> listaC = daoPsql.getLista(tabela);
+                    for (int i = 0; i < listaC.size(); i++) {
+                        id = listaC.get(i).getId();
+                    }
+                    break;
+                case "Funcionarios":
+                    List<Entidades> listaF = daoPsql.getLista(tabela);
+                    for (int i = 0; i < listaF.size(); i++) {
+                        id = listaF.get(i).getId();
+                    }
+                    break;
+                case "Produtos":
+                    List<Entidades> listaP = daoPsql.getLista(tabela);
+                    for (int i = 0; i < listaP.size(); i++) {
+                        id = listaP.get(i).getId();
+                    }
+                    break;
+                case "Vendas":
+                    List<Entidades> listaV = daoPsql.getLista(tabela);
+                    for (int i = 0; i < listaV.size(); i++) {
+                        id = listaV.get(i).getId();
+                    }
+                    break;
+            }
+        }
+        return id;
     }
 
     public void dbBackup(boolean dbAtual, String tabela) {
@@ -474,7 +507,7 @@ public class CRUD {
 
     }
 
-    public void delete(boolean dbAtual, String tabela, long id) {
+    public String delete(boolean dbAtual, String tabela, long id) {
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
             System.out.println("Ops! Algo deu errado.");
@@ -546,7 +579,7 @@ public class CRUD {
                 System.out.println("Ops! Algo deu errado.\nErro: " + e.getMessage());
             }
         }
-
+        return "Excluído com sucesso";
     }
 
 }
