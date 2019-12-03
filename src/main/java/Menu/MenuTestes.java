@@ -13,7 +13,7 @@ import Gerenciar.*;
  *
  * @author Aula
  */
-public class Menu {
+public class MenuTestes {
 
     public static void main(String[] args) {
         CRUD crud = new CRUD();
