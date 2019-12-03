@@ -9,12 +9,6 @@ package Telas;
 import Gerenciar.CRUD;
 import javax.swing.JOptionPane;
 
-
-
-
-
-
-
 /**
  *
  * @author eriks
@@ -41,6 +35,13 @@ public class Produto extends javax.swing.JInternalFrame {
         postgresPUEntityManager3 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
         produtosQuery = java.beans.Beans.isDesignTime() ? null : postgresPUEntityManager3.createQuery("SELECT p FROM Produtos p");
         produtosList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtosQuery.getResultList();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
+        produtosQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Produtos p");
+        produtosList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtosQuery1.getResultList();
+        vendasQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
+        vendasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery.getResultList();
+        produtosQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Produtos p");
+        produtosList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtosQuery2.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -113,7 +114,7 @@ public class Produto extends javax.swing.JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.preco}"), jFormattedTextFieldPreco, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, produtosList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, produtosList2, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("ID");
         columnBinding.setColumnClass(Long.class);
@@ -221,16 +222,16 @@ public class Produto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
         JOptionPane.showMessageDialog(null, atualizar.update(true, "Produtos", Long.parseLong(jTextFieldId.getText()), jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jFormattedTextFieldPreco.getText(), jTextFieldCodigo.getText(),null));
-        
-        
+        atualizar.update(false, "Produtos", Long.parseLong(jTextFieldId.getText()), jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jFormattedTextFieldPreco.getText(), jTextFieldCodigo.getText(),null);
+               
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         
         CRUD salvar = new CRUD();
-
         JOptionPane.showMessageDialog(null, salvar.save(true,"Produtos",jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jFormattedTextFieldPreco.getText(), jTextFieldCodigo.getText(),null));
+        salvar.save(false,"Produtos",jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jFormattedTextFieldPreco.getText(), jTextFieldCodigo.getText(),null);
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -239,10 +240,12 @@ public class Produto extends javax.swing.JInternalFrame {
         
         CRUD delete = new CRUD();
         JOptionPane.showMessageDialog(null, delete.delete(true,"Produtos",Long.parseLong(jTextFieldId.getText())));
+        delete.delete(false,"Produtos",Long.parseLong(jTextFieldId.getText()));
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JFormattedTextField jFormattedTextFieldPreco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -261,7 +264,13 @@ public class Produto extends javax.swing.JInternalFrame {
     private javax.swing.JToggleButton jToggleButton3;
     private javax.persistence.EntityManager postgresPUEntityManager3;
     private java.util.List<Entidades.Produtos> produtosList;
+    private java.util.List<Entidades.Produtos> produtosList1;
+    private java.util.List<Entidades.Produtos> produtosList2;
     private javax.persistence.Query produtosQuery;
+    private javax.persistence.Query produtosQuery1;
+    private javax.persistence.Query produtosQuery2;
+    private java.util.List<Entidades.Vendas> vendasList;
+    private javax.persistence.Query vendasQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

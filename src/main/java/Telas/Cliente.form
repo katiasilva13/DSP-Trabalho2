@@ -46,6 +46,29 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entidades.Clientes&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="javax.persistence.EntityManager" name="entityManager">
+      <Properties>
+        <Property name="persistenceUnit" type="java.lang.String" value="br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.persistence.Query" name="clientesQuery1">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT c FROM Clientes c"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="entityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="clientesList1">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="clientesQuery1"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entidades.Clientes&gt;"/>
+      </AuxValues>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
@@ -321,7 +344,7 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="clientesList" target="jTable2" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="clientesList1" target="jTable2" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${id}">
                 <BindingParameter name="NAME" value="ID"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Long.class"/>

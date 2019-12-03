@@ -35,6 +35,9 @@ public class Cliente extends javax.swing.JInternalFrame {
         postgresPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
         clientesQuery = java.beans.Beans.isDesignTime() ? null : postgresPUEntityManager0.createQuery("SELECT c FROM Clientes c");
         clientesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientesQuery.getResultList();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
+        clientesQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Clientes c");
+        clientesList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clientesQuery1.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -130,7 +133,7 @@ public class Cliente extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
         jLabel6.setText("Cliente");
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientesList, jTable2);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clientesList1, jTable2);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("ID");
         columnBinding.setColumnClass(Long.class);
@@ -261,6 +264,7 @@ public class Cliente extends javax.swing.JInternalFrame {
         CRUD salvar = new CRUD();
  
        JOptionPane.showMessageDialog(null, salvar.save(true, "Clientes", jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText()));
+       salvar.save(false, "Clientes", jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText());
        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -269,20 +273,24 @@ public class Cliente extends javax.swing.JInternalFrame {
         
         CRUD delete = new CRUD();
         JOptionPane.showMessageDialog(null, delete.delete(true,"Clientes",Long.parseLong(jTextFieldId.getText())));
-        
+        delete.delete(false,"Clientes",Long.parseLong(jTextFieldId.getText()));
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
         JOptionPane.showMessageDialog(null, atualizar.update(true,"Clientes",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText()));
+        atualizar.update(false,"Clientes",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText());
         
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<Entidades.Clientes> clientesList;
+    private java.util.List<Entidades.Clientes> clientesList1;
     private javax.persistence.Query clientesQuery;
+    private javax.persistence.Query clientesQuery1;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JFormattedTextField jFormattedTextFieldCel;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpf;
     private javax.swing.JLabel jLabel1;

@@ -115,4 +115,11 @@ public abstract class Entidades {
 
     public void setCpf(String cpf) {
     }
+
+    public static class Vendas {
+
+        public Vendas() {
+        }
+    }
+
 }

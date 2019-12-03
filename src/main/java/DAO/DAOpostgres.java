@@ -30,7 +30,6 @@ public class DAOpostgres {
 
             //Salvar
             session.save(obj);
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -53,7 +52,6 @@ public class DAOpostgres {
 
             //Salvar
             session.saveOrUpdate(obj);
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -105,7 +103,6 @@ public class DAOpostgres {
 
             }
 
-            //    session.flush();
             //Comitar / gravar no banco e finalizar
             transaction.commit();
 
@@ -154,7 +151,6 @@ public class DAOpostgres {
                     break;
 
             }
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -184,7 +180,6 @@ public class DAOpostgres {
             //Salvar
             lista = session.createQuery("from " + tabela).list();
             System.out.println("Estado da sessão: " + session.getStatistics());
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();

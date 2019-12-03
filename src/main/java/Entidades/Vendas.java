@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -20,6 +23,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vendas")
 public class Vendas extends Entidades implements Serializable {
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +64,9 @@ public class Vendas extends Entidades implements Serializable {
 
     @Override
     public void setId(long id) {
+        long oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getNomeProduto() {
@@ -66,7 +74,9 @@ public class Vendas extends Entidades implements Serializable {
     }
 
     public void setNomeProduto(String nomeProduto) {
+        String oldNomeProduto = this.nomeProduto;
         this.nomeProduto = nomeProduto;
+        changeSupport.firePropertyChange("nomeProduto", oldNomeProduto, nomeProduto);
     }
 
     public String getNomeCliente() {
@@ -74,7 +84,9 @@ public class Vendas extends Entidades implements Serializable {
     }
 
     public void setNomeCliente(String nomeCliente) {
+        String oldNomeCliente = this.nomeCliente;
         this.nomeCliente = nomeCliente;
+        changeSupport.firePropertyChange("nomeCliente", oldNomeCliente, nomeCliente);
     }
 
     public String getNomeFuncionario() {
@@ -82,7 +94,9 @@ public class Vendas extends Entidades implements Serializable {
     }
 
     public void setNomeFuncionario(String nomeFuncionarios) {
+        String oldNomeFuncionarios = this.nomeFuncionario;
         this.nomeFuncionario = nomeFuncionarios;
+        changeSupport.firePropertyChange("nomeFuncionario", oldNomeFuncionarios, nomeFuncionarios);
     }
 
     public String getPrecoProduto() {
@@ -90,7 +104,9 @@ public class Vendas extends Entidades implements Serializable {
     }
 
     public void setPrecoProduto(String precoProduto) {
+        String oldPrecoProduto = this.precoProduto;
         this.precoProduto = precoProduto;
+        changeSupport.firePropertyChange("precoProduto", oldPrecoProduto, precoProduto);
     }
 
     public String getCodigoProduto() {
@@ -98,6 +114,16 @@ public class Vendas extends Entidades implements Serializable {
     }
 
     public void setCodigoProduto(String codigoProduto) {
+        String oldCodigoProduto = this.codigoProduto;
         this.codigoProduto = codigoProduto;
+        changeSupport.firePropertyChange("codigoProduto", oldCodigoProduto, codigoProduto);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }

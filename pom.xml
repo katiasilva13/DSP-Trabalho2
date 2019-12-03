@@ -68,6 +68,12 @@
             <version>5.2.10.Final</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>br.com.unifamma</groupId>
+            <artifactId>Trabalho2</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <name>Trabalho2</name>
     <repositories>

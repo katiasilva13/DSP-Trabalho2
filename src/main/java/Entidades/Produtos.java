@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -20,6 +23,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produtos")
 public class Produtos extends Entidades implements Serializable {
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +60,9 @@ public class Produtos extends Entidades implements Serializable {
 
     @Override
     public void setId(long id) {
+        long oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     @Override
@@ -64,7 +72,9 @@ public class Produtos extends Entidades implements Serializable {
 
     @Override
     public void setNome(String nome) {
+        String oldNome = this.nome;
         this.nome = nome;
+        changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
     public String getFornecedor() {
@@ -72,7 +82,9 @@ public class Produtos extends Entidades implements Serializable {
     }
 
     public void setFornecedor(String fornecedor) {
+        String oldFornecedor = this.fornecedor;
         this.fornecedor = fornecedor;
+        changeSupport.firePropertyChange("fornecedor", oldFornecedor, fornecedor);
     }
 
     public String getPreco() {
@@ -80,7 +92,9 @@ public class Produtos extends Entidades implements Serializable {
     }
 
     public void setPreco(String preco) {
+        String oldPreco = this.preco;
         this.preco = preco;
+        changeSupport.firePropertyChange("preco", oldPreco, preco);
     }
 
     public String getCodigo() {
@@ -88,7 +102,17 @@ public class Produtos extends Entidades implements Serializable {
     }
 
     public void setCodigo(String codigo) {
+        String oldCodigo = this.codigo;
         this.codigo = codigo;
+        changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

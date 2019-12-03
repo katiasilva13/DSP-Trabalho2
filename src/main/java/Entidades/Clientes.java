@@ -5,6 +5,8 @@
  */
 package Entidades;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -20,6 +23,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientes")
 public class Clientes extends Entidades implements Serializable {
+
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +64,9 @@ public class Clientes extends Entidades implements Serializable {
 
     @Override
     public void setId(long id) {
+        long oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     @Override
@@ -68,7 +76,9 @@ public class Clientes extends Entidades implements Serializable {
 
     @Override
     public void setNome(String nome) {
+        String oldNome = this.nome;
         this.nome = nome;
+        changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
     public String getUltimoNome() {
@@ -76,7 +86,9 @@ public class Clientes extends Entidades implements Serializable {
     }
 
     public void setUltimoNome(String ultimoNome) {
+        String oldUltimoNome = this.ultimoNome;
         this.ultimoNome = ultimoNome;
+        changeSupport.firePropertyChange("ultimoNome", oldUltimoNome, ultimoNome);
     }
 
     @Override
@@ -86,7 +98,9 @@ public class Clientes extends Entidades implements Serializable {
 
     @Override
     public void setEmail(String email) {
+        String oldEmail = this.email;
         this.email = email;
+        changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
     public String getCel() {
@@ -94,7 +108,9 @@ public class Clientes extends Entidades implements Serializable {
     }
 
     public void setCel(String cel) {
+        String oldCel = this.cel;
         this.cel = cel;
+        changeSupport.firePropertyChange("cel", oldCel, cel);
     }
 
     public String getCpf() {
@@ -102,7 +118,17 @@ public class Clientes extends Entidades implements Serializable {
     }
 
     public void setCpf(String cpf) {
+        String oldCpf = this.cpf;
         this.cpf = cpf;
+        changeSupport.firePropertyChange("cpf", oldCpf, cpf);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

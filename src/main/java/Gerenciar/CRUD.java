@@ -330,75 +330,45 @@ public class CRUD {
                 switch (tabela) {
                     //Cliente(nome, ultimoNome, email, cel, cpf);
                     case "Clientes":
-                        Clientes c = (Clientes) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, c.getNome(), c.getUltimoNome(),
-                                    c.getEmail(), c.getCel(), c.getCpf());
-                        } 
-//                        else {
-//                            update(false, tabela, id, c.getNome(),
-//                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
-//                        }
+                        Clientes c = (Clientes) daoPsql.getByID(tabela, id);                        
                         c.setNome(col1);
                         c.setUltimoNome(col2);
                         c.setEmail(col3);
                         c.setCel(col4);
                         c.setCpf(col5);
                         daoPsql.Update(c);
-                        
-                        update(false, tabela, id, c.getNome(),
-                                  c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
-                        
-                        
+                        dbBackup(false, tabela);
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
-                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(), "");
-                        } else {
-                            update(false, tabela, f.getId(), f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(), "");
-                        }
+                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);                        
                         f.setNome(col1);
                         f.setUltimoNome(col2);
                         f.setEmail(col3);
                         f.setCel(col4);
                         daoPsql.Update(f);
+                        dbBackup(false, tabela);
                         break;
                     //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
-                        Produtos p = (Produtos) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(), "");
-                        } else {
-                            update(false, tabela, p.getId(), p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(), "");
-                        }
+                        Produtos p = (Produtos) daoPsql.getByID(tabela, id);                        
                         p.setNome(col1);
                         p.setFornecedor(col2);
                         p.setPreco(col3);
                         p.setCodigo(col4);
                         daoPsql.Update(p);
+                        dbBackup(false, tabela);
                         break;
                     //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                     case "Vendas":
                         Vendas v = (Vendas) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
-                                    v.getPrecoProduto(), v.getCodigoProduto());
-                        } else {
-                            update(false, tabela, v.getId(), v.getNomeProduto(), v.getNomeCliente(),
-                                    v.getNomeFuncionario(), v.getPrecoProduto(), v.getCodigoProduto());
-                        }
                         v.setNomeProduto(col1);
                         v.setNomeCliente(col2);
                         v.setNomeFuncionario(col3);
                         v.setPrecoProduto(col4);
                         v.setCodigoProduto(col5);
                         daoPsql.Update(v);
+                        dbBackup(false, tabela);
                         break;
                     default:
                         System.out.println("Erro");
@@ -407,9 +377,9 @@ public class CRUD {
                 if (e == null) {
                     System.out.println("e is really null!!!");
                 } else {
-                   System.out.println("e is not null, toString is " + e + " and message is " + e.getMessage());
+                    System.out.println("e is not null, toString is " + e + " and message is " + e.getMessage());
                 }
-                System.out.println("Ops! Algo deu errado. CRUD.update: linha 401\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.update: linha 382\nErro: " + e.getMessage());
             }
         }
         return "Atualizado";
@@ -508,12 +478,12 @@ public class CRUD {
                                 v.getPrecoProduto(), v.getCodigoProduto());
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 500");
+                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 481");
                         break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 505\nErro: " + e.getMessage());
+            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 486\nErro: " + e.getMessage());
         }
 
     }
@@ -521,7 +491,7 @@ public class CRUD {
     public String delete(boolean dbAtual, String tabela, long id) {
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado. CRUD.delete: linha 513");
+            System.out.println("Ops! Algo deu errado. CRUD.delete: linha 494");
         } else {
             try {
                 if (!dbAtual) {
@@ -534,52 +504,28 @@ public class CRUD {
                     //Cliente(nome, ultimoNome, email, cel, cpf);
                     case "Clientes":
                         Clientes c = (Clientes) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, c.getNome(), c.getUltimoNome(),
-                                    c.getEmail(), c.getCel(), c.getCpf());
-                        } else {
-                            update(false, tabela, c.getId(), c.getNome(),
-                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
-                        }
+                        dbBackup(dbAtual, tabela);                        
                         daoPsql.Delete(tabela, id);
                         crud.getAllTable(dbAtual, tabela);
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
                         Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(), "");
-                        } else {
-                            update(false, tabela, f.getId(), f.getNome(), f.getUltimoNome(),
-                                    f.getEmail(), f.getCel(), "");
-                        }
+                        dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
                         crud.getAllTable(dbAtual, tabela);
                         break;
                     //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
                         Produtos p = (Produtos) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(), "");
-                        } else {
-                            update(false, tabela, p.getId(), p.getNome(), p.getFornecedor(),
-                                    p.getPreco(), p.getCodigo(), "");
-                        }
+                        dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
                         crud.getAllTable(dbAtual, tabela);
                         break;
                     //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                     case "Vendas":
                         Vendas v = (Vendas) daoPsql.getByID(tabela, id);
-                        if (!checkID(false, tabela, id)) {
-                            save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
-                                    v.getPrecoProduto(), v.getCodigoProduto());
-                        } else {
-                            update(false, tabela, v.getId(), v.getNomeProduto(), v.getNomeCliente(),
-                                    v.getNomeFuncionario(), v.getPrecoProduto(), v.getCodigoProduto());
-                        }
+                        dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
                         crud.getAllTable(dbAtual, tabela);
                         break;
@@ -587,7 +533,7 @@ public class CRUD {
                         System.out.println("Erro");
                 }
             } catch (Exception e) {
-                System.out.println("Ops! Algo deu errado. CRUD.delete: linha 579\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.delete: linha 537\nErro: " + e.getMessage());
             }
         }
         return "Excluído com sucesso";

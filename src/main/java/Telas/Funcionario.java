@@ -34,6 +34,9 @@ public class Funcionario extends javax.swing.JInternalFrame {
         postgresPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
         funcionariosQuery = java.beans.Beans.isDesignTime() ? null : postgresPUEntityManager.createQuery("SELECT f FROM Funcionarios f");
         funcionariosList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery.getResultList();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
+        funcionariosQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
+        funcionariosList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery1.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -108,7 +111,7 @@ public class Funcionario extends javax.swing.JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), jTextFieldNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, funcionariosList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, funcionariosList1, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("ID");
         columnBinding.setColumnClass(Long.class);
@@ -206,29 +209,31 @@ public class Funcionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         CRUD delete = new CRUD();
         JOptionPane.showMessageDialog(null, delete.delete(true,"Funcionarios",Long.parseLong(jTextFieldId.getText())));
+        delete.delete(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()));
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         
         CRUD salvar = new CRUD();
-
         JOptionPane.showMessageDialog(null, salvar.save(true, "Funcionarios", jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null));
-        
+        salvar.save(false, "Funcionarios", jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
-        CRUD atualizar = new CRUD();
-        
-        
+        CRUD atualizar = new CRUD(); 
         JOptionPane.showMessageDialog(null, atualizar.update(true,"Funcionarios",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null));
+        atualizar.update(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager entityManager;
     private java.util.List<Entidades.Funcionarios> funcionariosList;
+    private java.util.List<Entidades.Funcionarios> funcionariosList1;
     private javax.persistence.Query funcionariosQuery;
+    private javax.persistence.Query funcionariosQuery1;
     private javax.swing.JFormattedTextField jFormattedTextFieldCel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
