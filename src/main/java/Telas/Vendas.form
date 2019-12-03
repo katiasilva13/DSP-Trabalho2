@@ -79,6 +79,24 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entidades.Vendas&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="javax.persistence.Query" name="vendasQuery4">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT v FROM Vendas v"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="entityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="vendasList4">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="vendasQuery4"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Entidades.Vendas&gt;"/>
+      </AuxValues>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
@@ -160,11 +178,11 @@
                           <Component id="jToggleButtonRelatorio" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jTextFieldQuantidade" max="32767" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldQuantidade" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextFieldPreco" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTextFieldPreco" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jTextFieldCliente" min="-2" pref="190" max="-2" attributes="0"/>
                           </Group>
@@ -191,10 +209,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -211,7 +229,7 @@
                   <Component id="jToggleButtonRelatorio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="188" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="192" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,13 +282,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButtonCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPreco">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format subtype="0" type="4"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButtonAtualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Atualizar"/>
@@ -315,11 +326,6 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -327,17 +333,13 @@
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="vendasList2" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="vendasList4" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${nomeProduto}">
                 <BindingParameter name="NAME" value="Produto"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${precoProduto}">
                 <BindingParameter name="NAME" value="Preco"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${quantidadeProduto}">
-                <BindingParameter name="NAME" value="Quantidade"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${codigoProduto}">
@@ -388,6 +390,13 @@
     <Component class="javax.swing.JTextField" name="jTextFieldQuantidade">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldProduto">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPreco">
+      <BindingProperties>
+        <BindingProperty name="text" source="jTable1" sourcePath="${selectedElement.precoProduto}" target="jTextFieldPreco" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

@@ -267,15 +267,13 @@ public class Cliente extends javax.swing.JInternalFrame {
                                                                     jTextFieldUltimoNome.getText(), 
                                                                     jTextFieldEmail.getText(),
                                                                     jFormattedTextFieldCel.getText(), 
-                                                                    jFormattedTextFieldCpf.getText(), 
-                                                                    null));
+                                                                    jFormattedTextFieldCpf.getText()));
        
        salvar.save(false, "Clientes", jTextFieldNome.getText(),
                                 jTextFieldUltimoNome.getText(), 
                                 jTextFieldEmail.getText(),
                                 jFormattedTextFieldCel.getText(), 
-                                jFormattedTextFieldCpf.getText(), 
-                                null);
+                                jFormattedTextFieldCpf.getText());
        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -294,23 +292,20 @@ public class Cliente extends javax.swing.JInternalFrame {
                                                                             jTextFieldUltimoNome.getText(), 
                                                                             jTextFieldEmail.getText(),
                                                                             jFormattedTextFieldCel.getText(), 
-                                                                            jFormattedTextFieldCpf.getText(), 
-                                                                            null));
+                                                                            jFormattedTextFieldCpf.getText()));
         try{
             atualizar.update(false,"Clientes",Long.parseLong(jTextFieldId.getText()),
                                                         jTextFieldNome.getText(),
                                                         jTextFieldUltimoNome.getText(), 
                                                         jTextFieldEmail.getText(),
                                                         jFormattedTextFieldCel.getText(), 
-                                                        jFormattedTextFieldCpf.getText(), 
-                                                        null);
+                                                        jFormattedTextFieldCpf.getText());
         }catch (Exception e){
             atualizar.save(false, "Clientes", jTextFieldNome.getText(),
                     jTextFieldUltimoNome.getText(), 
                     jTextFieldEmail.getText(),
                     jFormattedTextFieldCel.getText(), 
-                    jFormattedTextFieldCpf.getText(), 
-                    null);
+                    jFormattedTextFieldCpf.getText());
        
         }
         

@@ -43,18 +43,15 @@ public class Produtos extends Entidades implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-    @Column(name = "quantidade")
-    private String quantidade;
 
     public Produtos() {
     }
 
-    public Produtos(String nome, String fornecedor, String preco, String codigo, String quantidade) {
+    public Produtos(String nome, String fornecedor, String preco, String codigo) {
         this.nome = nome;
         this.fornecedor = fornecedor;
         this.preco = preco;
         this.codigo = codigo;
-        this.quantidade = quantidade;
     }
 
     @Override
@@ -115,16 +112,6 @@ public class Produtos extends Entidades implements Serializable {
         String oldCodigo = this.codigo;
         this.codigo = codigo;
         changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
-    }
-
-    @Override
-    public String getQuantidade() {
-        return quantidade;
-    }
-
-    @Override
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
     }
 
     

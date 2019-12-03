@@ -46,19 +46,17 @@ public class Vendas extends Entidades implements Serializable {
     @Column(name = "codigo")
     private String codigoProduto;
     
-    @Column(name = "quantidade")
-    private String quantidadeProduto;
 
     public Vendas() {
     }
 
-    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario, String precoProduto, String codigoProduto, String quantidadeProduto) {
+    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario, 
+            String precoProduto, String codigoProduto) {
         this.nomeProduto = nomeProduto;
         this.nomeCliente = nomeCliente;
         this.nomeFuncionario = nomeFuncionario;
         this.precoProduto = precoProduto;
         this.codigoProduto = codigoProduto;
-        this.quantidadeProduto = quantidadeProduto;
     }
   
 
@@ -134,17 +132,6 @@ public class Vendas extends Entidades implements Serializable {
         changeSupport.firePropertyChange("codigoProduto", oldCodigoProduto, codigoProduto);
     }
 
-    @Override
-    public String getQuantidadeProduto() {
-        return quantidadeProduto;
-    }
-
-    @Override
-    public void setQuantidadeProduto(String quantidadeProduto) {
-        String oldQuantidadeProduto = this.quantidadeProduto;
-        this.quantidadeProduto = quantidadeProduto;
-        changeSupport.firePropertyChange("quantidadeProduto", oldQuantidadeProduto, quantidadeProduto);
-    }
 
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

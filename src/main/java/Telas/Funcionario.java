@@ -227,15 +227,13 @@ public class Funcionario extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, salvar.save(true, "Funcionarios", jTextFieldNome.getText(), 
                                                                             jTextFieldUltimoNome.getText(), 
                                                                             jTextFieldEmail.getText(),
-                                                                            jFormattedTextFieldCel.getText(), 
-                                                                            null, 
+                                                                            jFormattedTextFieldCel.getText(),
                                                                             null));
        
         salvar.save(false, "Funcionarios", jTextFieldNome.getText(), 
                                         jTextFieldUltimoNome.getText(), 
                                         jTextFieldEmail.getText(),
                                         jFormattedTextFieldCel.getText(), 
-                                        null, 
                                         null);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -247,7 +245,6 @@ public class Funcionario extends javax.swing.JInternalFrame {
                                                                                             jTextFieldUltimoNome.getText(), 
                                                                                             jTextFieldEmail.getText(),
                                                                                             jFormattedTextFieldCel.getText(), 
-                                                                                            null, 
                                                                                             null));
         try{
           atualizar.update(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()),
@@ -255,14 +252,12 @@ public class Funcionario extends javax.swing.JInternalFrame {
                   jTextFieldUltimoNome.getText(), 
                   jTextFieldEmail.getText(),
                   jFormattedTextFieldCel.getText(), 
-                  null, 
                   null);          
         }catch(Exception e){
             atualizar.save(false, "Funcionarios", jTextFieldNome.getText(), 
                                                 jTextFieldUltimoNome.getText(), 
                                                 jTextFieldEmail.getText(),
                                                 jFormattedTextFieldCel.getText(), 
-                                                null, 
                                                 null);
   
         }

@@ -124,8 +124,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jFormattedTextFieldPreco" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldPreco" min="-2" pref="46" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jTextFieldQuantidade" max="32767" attributes="0"/>
@@ -170,13 +170,13 @@
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -185,7 +185,7 @@
                   <Component id="jToggleButtonAtualizar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="153" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="157" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -257,16 +257,6 @@
         <BindingProperty name="text" source="jTable1" sourcePath="${selectedElement.fornecedor}" target="jTextFieldFornecedor" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
         </BindingProperty>
-      </BindingProperties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPreco">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="R$ #.###,##" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
-      <BindingProperties>
-        <BindingProperty name="value" source="jTable1" sourcePath="${selectedElement.preco}" target="jFormattedTextFieldPreco" targetPath="value" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -373,6 +363,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldQuantidade">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPreco">
+      <BindingProperties>
+        <BindingProperty name="text" source="jTable1" sourcePath="${selectedElement.preco}" target="jTextFieldPreco" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

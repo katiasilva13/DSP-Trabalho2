@@ -41,6 +41,8 @@ public class Vendas extends javax.swing.JInternalFrame {
         vendasList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery2.getResultList();
         vendasQuery3 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
         vendasList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery3.getResultList();
+        vendasQuery4 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
+        vendasList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery4.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,7 +53,6 @@ public class Vendas extends javax.swing.JInternalFrame {
         jTextFieldFuncionario = new javax.swing.JTextField();
         jToggleButtonSalvar = new javax.swing.JToggleButton();
         jToggleButtonCancelar = new javax.swing.JToggleButton();
-        jFormattedTextFieldPreco = new javax.swing.JFormattedTextField();
         jToggleButtonAtualizar = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -62,6 +63,7 @@ public class Vendas extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextFieldQuantidade = new javax.swing.JTextField();
         jTextFieldProduto = new javax.swing.JTextField();
+        jTextFieldPreco = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -89,8 +91,6 @@ public class Vendas extends javax.swing.JInternalFrame {
             }
         });
 
-        jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-
         jToggleButtonAtualizar.setText("Atualizar");
         jToggleButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,15 +98,12 @@ public class Vendas extends javax.swing.JInternalFrame {
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList2, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList4, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeProduto}"));
         columnBinding.setColumnName("Produto");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoProduto}"));
         columnBinding.setColumnName("Preco");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidadeProduto}"));
-        columnBinding.setColumnName("Quantidade");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigoProduto}"));
         columnBinding.setColumnName("Codigo");
@@ -134,6 +131,9 @@ public class Vendas extends javax.swing.JInternalFrame {
         jLabel7.setText("ID:");
 
         jLabel8.setText("Quantidade:");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoProduto}"), jTextFieldPreco, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,11 +186,11 @@ public class Vendas extends javax.swing.JInternalFrame {
                             .addComponent(jToggleButtonRelatorio)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextFieldQuantidade)
-                                    .addGap(18, 18, 18)
+                                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(62, Short.MAX_VALUE))))
@@ -209,10 +209,10 @@ public class Vendas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -226,7 +226,7 @@ public class Vendas extends javax.swing.JInternalFrame {
                     .addComponent(jToggleButtonAtualizar)
                     .addComponent(jToggleButtonRelatorio))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -240,9 +240,8 @@ public class Vendas extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, salvar.save(true, "Vendas", jTextFieldProduto.getText(),
                                                                         jTextFieldCliente.getText(),
                                                                         jTextFieldFuncionario.getText(),
-                                                                        jFormattedTextFieldPreco.getText(),
-                                                                        jTextFieldCodigo.getText(),
-                                                                        jTextFieldQuantidade.getText()));
+                                                                        jTextFieldPreco.getText(),
+                                                                        jTextFieldCodigo.getText()));
 
 
     }//GEN-LAST:event_jToggleButtonSalvarActionPerformed
@@ -253,6 +252,15 @@ public class Vendas extends javax.swing.JInternalFrame {
 
     private void jToggleButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAtualizarActionPerformed
         // TODO add your handling code here:
+        CRUD atualizar = new CRUD();
+        JOptionPane.showMessageDialog(null, atualizar.update(true, "Vendas", Long.parseLong(jTextFieldId.getText()),
+                                                                     jTextFieldProduto.getText(),
+                                                                        jTextFieldCliente.getText(),
+                                                                        jTextFieldFuncionario.getText(),
+                                                                        jTextFieldCodigo.getText(), 
+                                                                        jTextFieldPreco.getText() ));                                                                      ;
+
+        
     }//GEN-LAST:event_jToggleButtonAtualizarActionPerformed
 
     private void jToggleButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonRelatorioActionPerformed
@@ -264,7 +272,6 @@ public class Vendas extends javax.swing.JInternalFrame {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPreco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -279,6 +286,7 @@ public class Vendas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldFuncionario;
     private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldProduto;
     private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JToggleButton jToggleButtonAtualizar;
@@ -289,10 +297,12 @@ public class Vendas extends javax.swing.JInternalFrame {
     private java.util.List<Entidades.Vendas> vendasList1;
     private java.util.List<Entidades.Vendas> vendasList2;
     private java.util.List<Entidades.Vendas> vendasList3;
+    private java.util.List<Entidades.Vendas> vendasList4;
     private javax.persistence.Query vendasQuery;
     private javax.persistence.Query vendasQuery1;
     private javax.persistence.Query vendasQuery2;
     private javax.persistence.Query vendasQuery3;
+    private javax.persistence.Query vendasQuery4;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
