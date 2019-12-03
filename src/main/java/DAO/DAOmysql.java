@@ -31,7 +31,6 @@ public class DAOmysql {
             //Salvar
             session.save(obj);
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -48,7 +47,6 @@ public class DAOmysql {
     public void Update(Entidades obj) {
         Transaction transaction = null;
         Session session = HibernateMySql.getSessionFactory().openSession();
-        //   try (Session session = HibernateMySql.getSessionFactory().openSession()) {
         try {
             //Start
             transaction.setTimeout(5); //Postgre OK, Mysql NO + erro CRUD.update linha 401

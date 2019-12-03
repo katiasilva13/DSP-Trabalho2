@@ -334,16 +334,22 @@ public class CRUD {
                         if (!checkID(false, tabela, id)) {
                             save(false, tabela, c.getNome(), c.getUltimoNome(),
                                     c.getEmail(), c.getCel(), c.getCpf());
-                        } else {
-                            update(false, tabela, id, c.getNome(),
-                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
-                        }
+                        } 
+//                        else {
+//                            update(false, tabela, id, c.getNome(),
+//                                    c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
+//                        }
                         c.setNome(col1);
                         c.setUltimoNome(col2);
                         c.setEmail(col3);
                         c.setCel(col4);
                         c.setCpf(col5);
                         daoPsql.Update(c);
+                        
+                        update(false, tabela, id, c.getNome(),
+                                  c.getUltimoNome(), c.getEmail(), c.getCel(), c.getCpf());
+                        
+                        
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
