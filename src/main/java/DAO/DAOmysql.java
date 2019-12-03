@@ -51,13 +51,13 @@ public class DAOmysql {
         //   try (Session session = HibernateMySql.getSessionFactory().openSession()) {
         try {
             //Start
-            transaction.setTimeout(5);
+    //        transaction.setTimeout(5); //Postgre OK, Mysql NO + erro CRUD.update linha 401
             transaction = session.beginTransaction();
 
+       transaction.setTimeout(5);//Mysql OK, Postgre NO + loop
             //Salvar
             session.saveOrUpdate(obj);
             System.err.println("Session: " + session.getStatistics() + " Transaction: " + transaction.getStatus());
-//            session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -109,7 +109,6 @@ public class DAOmysql {
 
             }
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
@@ -128,9 +127,8 @@ public class DAOmysql {
     public Entidades getByID(String tabela, long id) {
         Transaction transaction = null;
         Entidades obj = null;
-  //      Session session = HibernateMySql.getSessionFactory().openSession();
-        try (Session session = HibernateMySql.getSessionFactory().openSession()){
-
+        Session session = HibernateMySql.getSessionFactory().openSession();
+        try {
             //Start
             transaction = session.beginTransaction();
 
@@ -159,20 +157,18 @@ public class DAOmysql {
 
             }
             System.err.println("Session: " + session.getStatistics() + " Transactio: " + transaction.getStatus());
-            //    session.flush();
 
             //Comitar / gravar no banco e finalizar
             transaction.commit();
-//session.close();
+
         } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
-        } 
-//        finally {
-//            session.close();
-//        }
+        } finally {
+            session.close();
+        }
         return obj;
     }
 
