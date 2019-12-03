@@ -51,10 +51,10 @@ public class DAOmysql {
         //   try (Session session = HibernateMySql.getSessionFactory().openSession()) {
         try {
             //Start
-    //        transaction.setTimeout(5); //Postgre OK, Mysql NO + erro CRUD.update linha 401
+            transaction.setTimeout(5); //Postgre OK, Mysql NO + erro CRUD.update linha 401
             transaction = session.beginTransaction();
 
-       transaction.setTimeout(5);//Mysql OK, Postgre NO + loop
+    //   transaction.setTimeout(5);//Mysql OK, Postgre NO + loop
             //Salvar
             session.saveOrUpdate(obj);
             System.err.println("Session: " + session.getStatistics() + " Transaction: " + transaction.getStatus());

@@ -398,6 +398,11 @@ public class CRUD {
                         System.out.println("Erro");
                 }
             } catch (Exception e) {
+                if (e == null) {
+                    System.out.println("e is really null!!!");
+                } else {
+                   System.out.println("e is not null, toString is " + e + " and message is " + e.getMessage());
+                }
                 System.out.println("Ops! Algo deu errado. CRUD.update: linha 401\nErro: " + e.getMessage());
             }
         }
