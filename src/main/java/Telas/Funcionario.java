@@ -37,6 +37,14 @@ public class Funcionario extends javax.swing.JInternalFrame {
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("br.com.unifamma_Trabalho2_jar_1.0-SNAPSHOTPU").createEntityManager();
         funcionariosQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
         funcionariosList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery1.getResultList();
+        funcionariosQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
+        funcionariosList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery2.getResultList();
+        funcionariosQuery3 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
+        funcionariosList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery3.getResultList();
+        funcionariosQuery4 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
+        funcionariosList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery4.getResultList();
+        funcionariosQuery5 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT f FROM Funcionarios f");
+        funcionariosList5 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : funcionariosQuery5.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -111,9 +119,9 @@ public class Funcionario extends javax.swing.JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), jTextFieldNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, funcionariosList1, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, funcionariosList5, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
-        columnBinding.setColumnName("ID");
+        columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Long.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
@@ -121,11 +129,11 @@ public class Funcionario extends javax.swing.JInternalFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ultimoNome}"));
         columnBinding.setColumnName("Sobrenome");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cel}"));
-        columnBinding.setColumnName("Telefone");
-        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${email}"));
         columnBinding.setColumnName("Email");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cel}"));
+        columnBinding.setColumnName("Cel");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -209,22 +217,58 @@ public class Funcionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         CRUD delete = new CRUD();
         JOptionPane.showMessageDialog(null, delete.delete(true,"Funcionarios",Long.parseLong(jTextFieldId.getText())));
-        delete.delete(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()));
+        
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         
         CRUD salvar = new CRUD();
-        JOptionPane.showMessageDialog(null, salvar.save(true, "Funcionarios", jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null));
-        salvar.save(false, "Funcionarios", jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null);
+        JOptionPane.showMessageDialog(null, salvar.save(true, "Funcionarios", jTextFieldNome.getText(), 
+                                                                            jTextFieldUltimoNome.getText(), 
+                                                                            jTextFieldEmail.getText(),
+                                                                            jFormattedTextFieldCel.getText(), 
+                                                                            null, 
+                                                                            null));
+       
+        salvar.save(false, "Funcionarios", jTextFieldNome.getText(), 
+                                        jTextFieldUltimoNome.getText(), 
+                                        jTextFieldEmail.getText(),
+                                        jFormattedTextFieldCel.getText(), 
+                                        null, 
+                                        null);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD(); 
-        JOptionPane.showMessageDialog(null, atualizar.update(true,"Funcionarios",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null));
-        atualizar.update(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(), jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), null);
+        JOptionPane.showMessageDialog(null, atualizar.update(true,"Funcionarios",Long.parseLong(jTextFieldId.getText()),
+                                                                                            jTextFieldNome.getText(), 
+                                                                                            jTextFieldUltimoNome.getText(), 
+                                                                                            jTextFieldEmail.getText(),
+                                                                                            jFormattedTextFieldCel.getText(), 
+                                                                                            null, 
+                                                                                            null));
+        try{
+          atualizar.update(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()),
+                  jTextFieldNome.getText(), 
+                  jTextFieldUltimoNome.getText(), 
+                  jTextFieldEmail.getText(),
+                  jFormattedTextFieldCel.getText(), 
+                  null, 
+                  null);          
+        }catch(Exception e){
+            atualizar.save(false, "Funcionarios", jTextFieldNome.getText(), 
+                                                jTextFieldUltimoNome.getText(), 
+                                                jTextFieldEmail.getText(),
+                                                jFormattedTextFieldCel.getText(), 
+                                                null, 
+                                                null);
+  
+        }
+        
+        
+        
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
 
@@ -232,8 +276,16 @@ public class Funcionario extends javax.swing.JInternalFrame {
     private javax.persistence.EntityManager entityManager;
     private java.util.List<Entidades.Funcionarios> funcionariosList;
     private java.util.List<Entidades.Funcionarios> funcionariosList1;
+    private java.util.List<Entidades.Funcionarios> funcionariosList2;
+    private java.util.List<Entidades.Funcionarios> funcionariosList3;
+    private java.util.List<Entidades.Funcionarios> funcionariosList4;
+    private java.util.List<Entidades.Funcionarios> funcionariosList5;
     private javax.persistence.Query funcionariosQuery;
     private javax.persistence.Query funcionariosQuery1;
+    private javax.persistence.Query funcionariosQuery2;
+    private javax.persistence.Query funcionariosQuery3;
+    private javax.persistence.Query funcionariosQuery4;
+    private javax.persistence.Query funcionariosQuery5;
     private javax.swing.JFormattedTextField jFormattedTextFieldCel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

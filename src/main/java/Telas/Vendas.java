@@ -6,6 +6,8 @@
 package Telas;
 
 import Entidades.*;
+import Gerenciar.CRUD;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +37,10 @@ public class Vendas extends javax.swing.JInternalFrame {
         vendasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery.getResultList();
         vendasQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
         vendasList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery1.getResultList();
+        vendasQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
+        vendasList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery2.getResultList();
+        vendasQuery3 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
+        vendasList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery3.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -43,17 +49,19 @@ public class Vendas extends javax.swing.JInternalFrame {
         jTextFieldId = new javax.swing.JTextField();
         jTextFieldCliente = new javax.swing.JTextField();
         jTextFieldFuncionario = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButtonSalvar = new javax.swing.JToggleButton();
+        jToggleButtonCancelar = new javax.swing.JToggleButton();
         jFormattedTextFieldPreco = new javax.swing.JFormattedTextField();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleButtonAtualizar = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        jToggleButtonRelatorio = new javax.swing.JToggleButton();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldQuantidade = new javax.swing.JTextField();
+        jTextFieldProduto = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -65,32 +73,50 @@ public class Vendas extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Preço:");
 
-        jLabel5.setText("Código:");
+        jLabel5.setText("Código produto:");
 
-        jToggleButton1.setText("Salvar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonSalvar.setText("Salvar");
+        jToggleButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButtonSalvarActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Cancelar");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonCancelar.setText("Cancelar");
+        jToggleButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                jToggleButtonCancelarActionPerformed(evt);
             }
         });
 
         jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
 
-        jToggleButton3.setText("Atualizar");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonAtualizar.setText("Atualizar");
+        jToggleButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                jToggleButtonAtualizarActionPerformed(evt);
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList1, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList2, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeProduto}"));
+        columnBinding.setColumnName("Produto");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoProduto}"));
+        columnBinding.setColumnName("Preco");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidadeProduto}"));
+        columnBinding.setColumnName("Quantidade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigoProduto}"));
+        columnBinding.setColumnName("Codigo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeCliente}"));
+        columnBinding.setColumnName("Cliente");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeFuncionario}"));
+        columnBinding.setColumnName("Funcionario");
+        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
@@ -98,20 +124,16 @@ public class Vendas extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
         jLabel6.setText("Vendas");
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonRelatorio.setText("Gerar Relatório");
+        jToggleButtonRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton4.setText("Gerar EXCEL");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                jToggleButtonRelatorioActionPerformed(evt);
             }
         });
 
         jLabel7.setText("ID:");
+
+        jLabel8.setText("Quantidade:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,45 +148,52 @@ public class Vendas extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jToggleButtonSalvar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jToggleButtonCancelar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jToggleButtonAtualizar)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jToggleButton1)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jToggleButton2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jToggleButton3))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldId)
-                                                .addGap(110, 110, 110)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jToggleButton4)
-                                    .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(23, 23, 23))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(10, 10, 10))))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(45, Short.MAX_VALUE))))
+                                .addGap(10, 10, 10)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButtonRelatorio)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextFieldQuantidade)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(62, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,15 +202,17 @@ public class Vendas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
                     .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8)
+                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -190,12 +221,12 @@ public class Vendas extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
+                    .addComponent(jToggleButtonSalvar)
+                    .addComponent(jToggleButtonCancelar)
+                    .addComponent(jToggleButtonAtualizar)
+                    .addComponent(jToggleButtonRelatorio))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -203,34 +234,36 @@ public class Vendas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jToggleButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+        CRUD salvar = new CRUD();
+        JOptionPane.showMessageDialog(null, salvar.save(true, "Vendas", jTextFieldProduto.getText(),
+                                                                        jTextFieldCliente.getText(),
+                                                                        jTextFieldFuncionario.getText(),
+                                                                        jFormattedTextFieldPreco.getText(),
+                                                                        jTextFieldCodigo.getText(),
+                                                                        jTextFieldQuantidade.getText()));
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    }//GEN-LAST:event_jToggleButtonSalvarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jToggleButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonCancelarActionPerformed
         // TODO add your handling code here:
-       
+    }//GEN-LAST:event_jToggleButtonCancelarActionPerformed
+
+    private void jToggleButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButtonAtualizarActionPerformed
+
+    private void jToggleButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonRelatorioActionPerformed
+        // TODO add your handling code here:
         
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
         
-        
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    }//GEN-LAST:event_jToggleButtonRelatorioActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JComboBox<Object> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextFieldPreco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -239,20 +272,27 @@ public class Vendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldCliente;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldFuncionario;
     private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JTextField jTextFieldProduto;
+    private javax.swing.JTextField jTextFieldQuantidade;
+    private javax.swing.JToggleButton jToggleButtonAtualizar;
+    private javax.swing.JToggleButton jToggleButtonCancelar;
+    private javax.swing.JToggleButton jToggleButtonRelatorio;
+    private javax.swing.JToggleButton jToggleButtonSalvar;
     private java.util.List<Entidades.Vendas> vendasList;
     private java.util.List<Entidades.Vendas> vendasList1;
+    private java.util.List<Entidades.Vendas> vendasList2;
+    private java.util.List<Entidades.Vendas> vendasList3;
     private javax.persistence.Query vendasQuery;
     private javax.persistence.Query vendasQuery1;
+    private javax.persistence.Query vendasQuery2;
+    private javax.persistence.Query vendasQuery3;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

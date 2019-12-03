@@ -45,17 +45,22 @@ public class Vendas extends Entidades implements Serializable {
 
     @Column(name = "codigo")
     private String codigoProduto;
+    
+    @Column(name = "quantidade")
+    private String quantidadeProduto;
 
     public Vendas() {
     }
 
-    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario, String precoProduto, String codigoProduto) {
+    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario, String precoProduto, String codigoProduto, String quantidadeProduto) {
         this.nomeProduto = nomeProduto;
         this.nomeCliente = nomeCliente;
         this.nomeFuncionario = nomeFuncionario;
         this.precoProduto = precoProduto;
         this.codigoProduto = codigoProduto;
+        this.quantidadeProduto = quantidadeProduto;
     }
+  
 
     @Override
     public long getId() {
@@ -69,55 +74,78 @@ public class Vendas extends Entidades implements Serializable {
         changeSupport.firePropertyChange("id", oldId, id);
     }
 
+    @Override
     public String getNomeProduto() {
         return nomeProduto;
     }
 
+    @Override
     public void setNomeProduto(String nomeProduto) {
         String oldNomeProduto = this.nomeProduto;
         this.nomeProduto = nomeProduto;
         changeSupport.firePropertyChange("nomeProduto", oldNomeProduto, nomeProduto);
     }
 
+    @Override
     public String getNomeCliente() {
         return nomeCliente;
     }
 
+    @Override
     public void setNomeCliente(String nomeCliente) {
         String oldNomeCliente = this.nomeCliente;
         this.nomeCliente = nomeCliente;
         changeSupport.firePropertyChange("nomeCliente", oldNomeCliente, nomeCliente);
     }
 
+    @Override
     public String getNomeFuncionario() {
         return nomeFuncionario;
     }
 
+    @Override
     public void setNomeFuncionario(String nomeFuncionarios) {
         String oldNomeFuncionarios = this.nomeFuncionario;
         this.nomeFuncionario = nomeFuncionarios;
         changeSupport.firePropertyChange("nomeFuncionario", oldNomeFuncionarios, nomeFuncionarios);
     }
 
+    @Override
     public String getPrecoProduto() {
         return precoProduto;
     }
 
+    @Override
     public void setPrecoProduto(String precoProduto) {
         String oldPrecoProduto = this.precoProduto;
         this.precoProduto = precoProduto;
         changeSupport.firePropertyChange("precoProduto", oldPrecoProduto, precoProduto);
     }
 
+    @Override
     public String getCodigoProduto() {
         return codigoProduto;
     }
 
+    @Override
     public void setCodigoProduto(String codigoProduto) {
         String oldCodigoProduto = this.codigoProduto;
         this.codigoProduto = codigoProduto;
         changeSupport.firePropertyChange("codigoProduto", oldCodigoProduto, codigoProduto);
     }
+
+    @Override
+    public String getQuantidadeProduto() {
+        return quantidadeProduto;
+    }
+
+    @Override
+    public void setQuantidadeProduto(String quantidadeProduto) {
+        String oldQuantidadeProduto = this.quantidadeProduto;
+        this.quantidadeProduto = quantidadeProduto;
+        changeSupport.firePropertyChange("quantidadeProduto", oldQuantidadeProduto, quantidadeProduto);
+    }
+
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);

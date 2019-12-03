@@ -263,8 +263,19 @@ public class Cliente extends javax.swing.JInternalFrame {
         
         CRUD salvar = new CRUD();
  
-       JOptionPane.showMessageDialog(null, salvar.save(true, "Clientes", jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText()));
-       salvar.save(false, "Clientes", jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText());
+       JOptionPane.showMessageDialog(null, salvar.save(true, "Clientes", jTextFieldNome.getText(),
+                                                                    jTextFieldUltimoNome.getText(), 
+                                                                    jTextFieldEmail.getText(),
+                                                                    jFormattedTextFieldCel.getText(), 
+                                                                    jFormattedTextFieldCpf.getText(), 
+                                                                    null));
+       
+       salvar.save(false, "Clientes", jTextFieldNome.getText(),
+                                jTextFieldUltimoNome.getText(), 
+                                jTextFieldEmail.getText(),
+                                jFormattedTextFieldCel.getText(), 
+                                jFormattedTextFieldCpf.getText(), 
+                                null);
        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -273,14 +284,36 @@ public class Cliente extends javax.swing.JInternalFrame {
         
         CRUD delete = new CRUD();
         JOptionPane.showMessageDialog(null, delete.delete(true,"Clientes",Long.parseLong(jTextFieldId.getText())));
-        delete.delete(false,"Clientes",Long.parseLong(jTextFieldId.getText()));
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
-        JOptionPane.showMessageDialog(null, atualizar.update(true,"Clientes",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText()));
-        atualizar.update(false,"Clientes",Long.parseLong(jTextFieldId.getText()),jTextFieldNome.getText(),jTextFieldUltimoNome.getText(), jTextFieldEmail.getText(),jFormattedTextFieldCel.getText(), jFormattedTextFieldCpf.getText());
+        JOptionPane.showMessageDialog(null, atualizar.update(true,"Clientes",Long.parseLong(jTextFieldId.getText()),
+                                                                            jTextFieldNome.getText(),
+                                                                            jTextFieldUltimoNome.getText(), 
+                                                                            jTextFieldEmail.getText(),
+                                                                            jFormattedTextFieldCel.getText(), 
+                                                                            jFormattedTextFieldCpf.getText(), 
+                                                                            null));
+        try{
+            atualizar.update(false,"Clientes",Long.parseLong(jTextFieldId.getText()),
+                                                        jTextFieldNome.getText(),
+                                                        jTextFieldUltimoNome.getText(), 
+                                                        jTextFieldEmail.getText(),
+                                                        jFormattedTextFieldCel.getText(), 
+                                                        jFormattedTextFieldCpf.getText(), 
+                                                        null);
+        }catch (Exception e){
+            atualizar.save(false, "Clientes", jTextFieldNome.getText(),
+                    jTextFieldUltimoNome.getText(), 
+                    jTextFieldEmail.getText(),
+                    jFormattedTextFieldCel.getText(), 
+                    jFormattedTextFieldCpf.getText(), 
+                    null);
+       
+        }
+        
         
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 

@@ -77,26 +77,43 @@ public class Funcionarios extends Entidades implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
+    @Override
     public String getUltimoNome() {
         return ultimoNome;
     }
 
+    @Override
     public void setUltimoNome(String ultimoNome) {
         String oldUltimoNome = this.ultimoNome;
         this.ultimoNome = ultimoNome;
         changeSupport.firePropertyChange("ultimoNome", oldUltimoNome, ultimoNome);
     }
 
+    @Override
     public String getCel() {
         return cel;
     }
 
+    @Override
     public void setCel(String cel) {
         String oldCel = this.cel;
         this.cel = cel;
         changeSupport.firePropertyChange("cel", oldCel, cel);
     }
 
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        String oldEmail = this.email;
+        this.email = email;
+        changeSupport.firePropertyChange("email", oldEmail, email);
+    }
+
+    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }

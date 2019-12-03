@@ -43,14 +43,18 @@ public class Produtos extends Entidades implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
+    @Column(name = "quantidade")
+    private String quantidade;
+
     public Produtos() {
     }
 
-    public Produtos(String nome, String fornecedor, String preco, String codigo) {
+    public Produtos(String nome, String fornecedor, String preco, String codigo, String quantidade) {
         this.nome = nome;
         this.fornecedor = fornecedor;
         this.preco = preco;
         this.codigo = codigo;
+        this.quantidade = quantidade;
     }
 
     @Override
@@ -77,36 +81,54 @@ public class Produtos extends Entidades implements Serializable {
         changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
+    @Override
     public String getFornecedor() {
         return fornecedor;
     }
 
+    @Override
     public void setFornecedor(String fornecedor) {
         String oldFornecedor = this.fornecedor;
         this.fornecedor = fornecedor;
         changeSupport.firePropertyChange("fornecedor", oldFornecedor, fornecedor);
     }
 
+    @Override
     public String getPreco() {
         return preco;
     }
 
+    @Override
     public void setPreco(String preco) {
         String oldPreco = this.preco;
         this.preco = preco;
         changeSupport.firePropertyChange("preco", oldPreco, preco);
     }
 
+    @Override
     public String getCodigo() {
         return codigo;
     }
 
+    @Override
     public void setCodigo(String codigo) {
         String oldCodigo = this.codigo;
         this.codigo = codigo;
         changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
     }
 
+    @Override
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    @Override
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    
+    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }

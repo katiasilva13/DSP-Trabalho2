@@ -18,7 +18,7 @@ public class CRUD {
     String registro = "";
 
     public String save(boolean dbAtual, String tabela, String col1, String col2,
-            String col3, String col4, String col5) {
+            String col3, String col4, String col5, String col6) {
 
         if (!dbAtual) {
             DAOmysql daoMsql = new DAOmysql();
@@ -35,12 +35,12 @@ public class CRUD {
                     break;
                 //Produto(nome, fornecedor, preco, codigo);
                 case "Produtos":
-                    Produtos p = new Produtos(col1, col2, col3, col4);
+                    Produtos p = new Produtos(col1, col2, col3, col4, col5);
                     daoMsql.Save(p);
                     break;
                 //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                 case "Vendas":
-                    Vendas v = new Vendas(col1, col2, col3, col4, col5);
+                    Vendas v = new Vendas(col1, col2, col3, col4, col5, col6);
                     daoMsql.Save(v);
                     break;
                 default:
@@ -64,13 +64,13 @@ public class CRUD {
                 //Produto(nome, fornecedor, preco, codigo);
                 case "Produtos":
                     dbBackup(false, tabela);
-                    Produtos p = new Produtos(col1, col2, col3, col4);
+                    Produtos p = new Produtos(col1, col2, col3, col4, col5);
                     daoPsql.Save(p);
                     break;
                 //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);  
                 case "Vendas":
                     dbBackup(false, tabela);
-                    Vendas v = new Vendas(col1, col2, col3, col4, col5);
+                    Vendas v = new Vendas(col1, col2, col3, col4, col5, col6);
                     daoPsql.Save(v);
                     break;
                 default:
@@ -108,7 +108,8 @@ public class CRUD {
                         registro = "\nProduto: \nNome:" + p.getNome()
                                 + "\nSobrenome:" + p.getFornecedor()
                                 + "\nEmail:" + p.getPreco()
-                                + "\nCelular:" + p.getCodigo();
+                                + "\nCelular:" + p.getCodigo()
+                                + "\nQuantidade: " + p.getQuantidade();
                         break;
                     case "Vendas":
                         Vendas v;
@@ -117,10 +118,11 @@ public class CRUD {
                                 + "\nNome funcionario:" + v.getNomeFuncionario()
                                 + "\nNome produto:" + v.getNomeProduto()
                                 + "\nPreco produto:" + v.getPrecoProduto()
-                                + "\nCodigo produto:" + v.getCodigoProduto();
+                                + "\nCodigo produto:" + v.getCodigoProduto()
+                                + "\nQuantidade produto:" + v.getQuantidadeProduto();
                         break;
                     default:
-                        registro = "Ops! Algo deu errado. CRUD.getById: linha 123";
+                        registro = "Ops! Algo deu errado. CRUD.getById: linha 125";
                         break;
                 }
             } else {
@@ -148,7 +150,8 @@ public class CRUD {
                         registro = "\nProduto: \nNome:" + p.getNome()
                                 + "\nSobrenome:" + p.getFornecedor()
                                 + "\nEmail:" + p.getPreco()
-                                + "\nCelular:" + p.getCodigo();
+                                + "\nCelular:" + p.getCodigo()
+                                + "\nQuantidade:" + p.getQuantidade();
                         break;
                     case "Vendas":
                         Vendas v;
@@ -157,15 +160,16 @@ public class CRUD {
                                 + "\nNome funcionario:" + v.getNomeFuncionario()
                                 + "\nNome produto:" + v.getNomeProduto()
                                 + "\nPreco produto:" + v.getPrecoProduto()
-                                + "\nCodigo produto:" + v.getCodigoProduto();
+                                + "\nCodigo produto:" + v.getCodigoProduto()
+                                + "\nQuantidade produto:" + v.getQuantidadeProduto();
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado. CRUD.getById: linha 163");
+                        System.out.println("Ops! Algo deu errado. CRUD.getById: linha 167");
                         break;
                 }
             }
         } catch (Exception e) {
-            registro = "Ops! Algo deu errado. CRUD.getById: linha 168\nErro: " + e.getMessage();
+            registro = "Ops! Algo deu errado. CRUD.getById: linha 172\nErro: " + e.getMessage();
         }
         return registro;
 
@@ -199,8 +203,9 @@ public class CRUD {
                     for (int i = 0; i < listaP.size(); i++) {
                         System.out.println("Lista  id: " + listaP.get(i).getId() + "\nNome: " + listaP.get(i).getNome()
                                 + "\nFornecedor: " + listaP.get(i).getFornecedor()
-                                + "\nPreco produto:" + listaP.get(i).getPreco()
-                                + "\nCodigo produto:" + listaP.get(i).getCodigo());
+                                + "\nPreco:" + listaP.get(i).getPreco()
+                                + "\nCodigo:" + listaP.get(i).getCodigo()
+                                + "\nQuantidade:" + listaP.get(i).getQuantidade());
                     }
                     break;
                 case "Vendas":
@@ -210,7 +215,8 @@ public class CRUD {
                                 + "\nNome funcionario: " + listaV.get(i).getNomeFuncionario()
                                 + "\nNome produto:" + listaV.get(i).getNomeProduto()
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
-                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
+                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto()
+                                + "\nQuantidade produto:" + listaV.get(i).getQuantidadeProduto());
                     }
                     break;
             }
@@ -242,7 +248,8 @@ public class CRUD {
                         System.out.println("Lista  id: " + listaP.get(i).getId() + "\nNome: " + listaP.get(i).getNome()
                                 + "\nFornecedor: " + listaP.get(i).getFornecedor()
                                 + "\nPreco produto:" + listaP.get(i).getPreco()
-                                + "\nCodigo produto:" + listaP.get(i).getCodigo());
+                                + "\nCodigo produto:" + listaP.get(i).getCodigo()
+                                + "\nQuantidade produto:" + listaP.get(i).getQuantidade());
                     }
                     break;
                 case "Vendas":
@@ -252,7 +259,8 @@ public class CRUD {
                                 + "\nNome funcionario: " + listaV.get(i).getNomeFuncionario()
                                 + "\nNome produto:" + listaV.get(i).getNomeProduto()
                                 + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
-                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto());
+                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto()
+                                + "\nQuantidade produto:" + listaV.get(i).getQuantidadeProduto());
                     }
                     break;
             }
@@ -274,11 +282,11 @@ public class CRUD {
     }
 
     public String update(boolean dbAtual, String tabela, long id, String col1, String col2,
-            String col3, String col4, String col5) {
+            String col3, String col4, String col5, String col6) {
 
         CRUD crud = new CRUD();
         if (!checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado. CRUD.update: linha281");
+            System.out.println("Ops! Algo deu errado. CRUD.update: linha289");
         } else {
             try {
                 if (false == dbAtual) {
@@ -310,6 +318,7 @@ public class CRUD {
                             p.setFornecedor(col2);
                             p.setPreco(col3);
                             p.setCodigo(col4);
+                            p.setQuantidade(col5);
                             daoMsql.Update(p);
                             break;
                         //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
@@ -320,6 +329,7 @@ public class CRUD {
                             v.setNomeFuncionario(col3);
                             v.setPrecoProduto(col4);
                             v.setCodigoProduto(col5);
+                            v.setQuantidadeProduto(col6);
                             daoMsql.Update(v);
                             break;
                         default:
@@ -330,7 +340,7 @@ public class CRUD {
                 switch (tabela) {
                     //Cliente(nome, ultimoNome, email, cel, cpf);
                     case "Clientes":
-                        Clientes c = (Clientes) daoPsql.getByID(tabela, id);                        
+                        Clientes c = (Clientes) daoPsql.getByID(tabela, id);
                         c.setNome(col1);
                         c.setUltimoNome(col2);
                         c.setEmail(col3);
@@ -341,7 +351,7 @@ public class CRUD {
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
-                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);                        
+                        Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
                         f.setNome(col1);
                         f.setUltimoNome(col2);
                         f.setEmail(col3);
@@ -351,11 +361,12 @@ public class CRUD {
                         break;
                     //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
-                        Produtos p = (Produtos) daoPsql.getByID(tabela, id);                        
+                        Produtos p = (Produtos) daoPsql.getByID(tabela, id);
                         p.setNome(col1);
                         p.setFornecedor(col2);
                         p.setPreco(col3);
                         p.setCodigo(col4);
+                        p.setQuantidade(col5);
                         daoPsql.Update(p);
                         dbBackup(false, tabela);
                         break;
@@ -367,6 +378,7 @@ public class CRUD {
                         v.setNomeFuncionario(col3);
                         v.setPrecoProduto(col4);
                         v.setCodigoProduto(col5);
+                        v.setQuantidadeProduto(col6);
                         daoPsql.Update(v);
                         dbBackup(false, tabela);
                         break;
@@ -379,7 +391,7 @@ public class CRUD {
                 } else {
                     System.out.println("e is not null, toString is " + e + " and message is " + e.getMessage());
                 }
-                System.out.println("Ops! Algo deu errado. CRUD.update: linha 382\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.update: linha 394\nErro: " + e.getMessage());
             }
         }
         return "Atualizado";
@@ -457,33 +469,33 @@ public class CRUD {
                     case "Clientes":
                         Clientes c = (Clientes) daoPsql.getByID(tabela, lastID(true, tabela));
                         save(false, tabela, c.getNome(), c.getUltimoNome(),
-                                c.getEmail(), c.getCel(), c.getCpf());
+                                c.getEmail(), c.getCel(), c.getCpf(), "");
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
                         Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, lastID(true, tabela));
                         save(false, tabela, f.getNome(), f.getUltimoNome(),
-                                f.getEmail(), f.getCel(), "");
+                                f.getEmail(), f.getCel(), "", "");
                         break;
                     //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
                         Produtos p = (Produtos) daoPsql.getByID(tabela, lastID(true, tabela));
                         save(false, tabela, p.getNome(), p.getFornecedor(),
-                                p.getPreco(), p.getCodigo(), "");
+                                p.getPreco(), p.getCodigo(), p.getQuantidade(), "");
                         break;
                     //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                     case "Vendas":
                         Vendas v = (Vendas) daoPsql.getByID(tabela, lastID(true, tabela));
                         save(false, tabela, v.getNomeProduto(), v.getNomeCliente(), v.getNomeFuncionario(),
-                                v.getPrecoProduto(), v.getCodigoProduto());
+                                v.getPrecoProduto(), v.getCodigoProduto(), v.getQuantidadeProduto());
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 481");
+                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 493");
                         break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 486\nErro: " + e.getMessage());
+            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 498\nErro: " + e.getMessage());
         }
 
     }
@@ -504,7 +516,7 @@ public class CRUD {
                     //Cliente(nome, ultimoNome, email, cel, cpf);
                     case "Clientes":
                         Clientes c = (Clientes) daoPsql.getByID(tabela, id);
-                        dbBackup(dbAtual, tabela);                        
+                        dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
                         crud.getAllTable(dbAtual, tabela);
                         break;

@@ -115,6 +115,19 @@ public abstract class Entidades {
 
     public void setCpf(String cpf) {
     }
+    
+    public String getQuantidade() {
+        return null;
+    }
+public String getQuantidadeProduto() {
+        return null;
+    }
+
+    public void setQuantidade(String qauntidade) {
+    }
+
+    public void setQuantidadeProduto(String quantidadeProduto) {
+    }
 
     public static class Vendas {
 
