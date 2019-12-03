@@ -270,9 +270,9 @@ public class CRUD {
 
     public boolean checkID(boolean dbAtual, String tabela, long id) {
         boolean idCheck;
-        if (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado.\nErro: null")) {
-            idCheck = false;
-        } else if (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado.")) {
+        if ((getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 172\nErro: null"))
+                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 125"))
+                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 167")) ){
             idCheck = false;
         } else {
             idCheck = true;
