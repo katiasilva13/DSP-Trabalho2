@@ -5,8 +5,9 @@
  */
 package Telas;
 
+import DAO.*;
 import Entidades.*;
-import Gerenciar.CRUD;
+import Gerenciar.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,12 +44,14 @@ public class Vendas extends javax.swing.JInternalFrame {
         vendasList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery3.getResultList();
         vendasQuery4 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
         vendasList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery4.getResultList();
+        vendasQuery5 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vendas v");
+        vendasList5 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vendasQuery5.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldIdVenda = new javax.swing.JTextField();
         jTextFieldCliente = new javax.swing.JTextField();
         jTextFieldFuncionario = new javax.swing.JTextField();
         jToggleButtonSalvar = new javax.swing.JToggleButton();
@@ -57,13 +60,16 @@ public class Vendas extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jToggleButtonRelatorio = new javax.swing.JToggleButton();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelIdVenda = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextFieldQuantidade = new javax.swing.JTextField();
         jTextFieldProduto = new javax.swing.JTextField();
         jTextFieldPreco = new javax.swing.JTextField();
+        jLabelIdCliente = new javax.swing.JLabel();
+        jTextFieldIdCliente = new javax.swing.JTextField();
+        jLabelIdFuncionario = new javax.swing.JLabel();
+        jTextFieldIdFuncionario = new javax.swing.JTextField();
+        jLabelIdProduto = new javax.swing.JLabel();
+        jTextFieldIdProduto = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -76,6 +82,15 @@ public class Vendas extends javax.swing.JInternalFrame {
         jLabel4.setText("Preço:");
 
         jLabel5.setText("Código produto:");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.id}"), jTextFieldIdVenda, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeCliente}"), jTextFieldCliente, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeFuncionario}"), jTextFieldFuncionario, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         jToggleButtonSalvar.setText("Salvar");
         jToggleButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,8 +113,11 @@ public class Vendas extends javax.swing.JInternalFrame {
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList4, jTable1);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeProduto}"));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vendasList5, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("ID");
+        columnBinding.setColumnClass(Long.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeProduto}"));
         columnBinding.setColumnName("Produto");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoProduto}"));
@@ -121,19 +139,22 @@ public class Vendas extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
         jLabel6.setText("Vendas");
 
-        jToggleButtonRelatorio.setText("Gerar Relatório");
-        jToggleButtonRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonRelatorioActionPerformed(evt);
-            }
-        });
+        jLabelIdVenda.setText("ID venda:");
 
-        jLabel7.setText("ID:");
-
-        jLabel8.setText("Quantidade:");
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoProduto}"), jTextFieldPreco, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codigoProduto}"), jTextFieldCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeProduto}"), jTextFieldProduto, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoProduto}"), jTextFieldPreco, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabelIdCliente.setText("ID cliente:");
+
+        jLabelIdFuncionario.setText("ID funcionário:");
+
+        jLabelIdProduto.setText("ID produto:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,56 +165,57 @@ public class Vendas extends javax.swing.JInternalFrame {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jToggleButtonSalvar)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jToggleButtonCancelar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jToggleButtonAtualizar)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(23, 23, 23))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(10, 10, 10))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jToggleButtonAtualizar))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addGap(10, 10, 10)))
+                                .addComponent(jLabelIdVenda)
+                                .addGap(217, 217, 217))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabelIdFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabelIdCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabelIdProduto)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButtonRelatorio)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(62, Short.MAX_VALUE))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldPreco)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(85, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(jTextFieldIdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,32 +223,44 @@ public class Vendas extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelIdVenda)
+                    .addComponent(jTextFieldIdVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIdProduto)
+                    .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextFieldQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelIdCliente)
+                    .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelIdFuncionario)
+                            .addComponent(jTextFieldIdFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButtonSalvar)
-                    .addComponent(jToggleButtonCancelar)
                     .addComponent(jToggleButtonAtualizar)
-                    .addComponent(jToggleButtonRelatorio))
+                    .addComponent(jToggleButtonCancelar)
+                    .addComponent(jToggleButtonSalvar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         bindingGroup.bind();
@@ -237,12 +271,39 @@ public class Vendas extends javax.swing.JInternalFrame {
     private void jToggleButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSalvarActionPerformed
         // TODO add your handling code here:
         CRUD salvar = new CRUD();
-        JOptionPane.showMessageDialog(null, salvar.save(true, "Vendas", jTextFieldProduto.getText(),
-                                                                        jTextFieldCliente.getText(),
-                                                                        jTextFieldFuncionario.getText(),
-                                                                        jTextFieldPreco.getText(),
-                                                                        jTextFieldCodigo.getText()));
+        try{
+            boolean cliente, produto, func;
+            cliente = salvar.checkID(true, "Clientes", Long.parseLong(jTextFieldIdCliente.getText()));
+            func = salvar.checkID(true, "Fucnionarios", Long.parseLong(jTextFieldIdFuncionario.getText()));
+            produto = salvar.checkID(true, "Produtos", Long.parseLong(jTextFieldIdProduto.getText()));
+            if(cliente && func && produto){
+                DAOpostgres daoPsql = new DAOpostgres();
+                Clientes c = (Clientes) daoPsql.getByID("Clientes", Long.parseLong(jTextFieldIdCliente.getText()));                
+                String nomeCliente = c.getNome();
+                Funcionarios f = (Funcionarios) daoPsql.getByID("Funcionarios", Long.parseLong(jTextFieldIdFuncionario.getText()));
+                String nomeFunc = f.getNome();
+                Produtos p = (Produtos) daoPsql.getByID("Produtos", Long.parseLong(jTextFieldIdProduto.getText()));
+                String nomeP, precoP, codigoP;
+                long idP = p.getId();
+                nomeP = p.getNome();
+                precoP = p.getPreco();
+                codigoP = p.getCodigo();      
+                JOptionPane.showMessageDialog(null, salvar.save(true, "Vendas", nomeP,
+                                                            nomeCliente,
+                                                            nomeFunc,
+                                                            precoP,
+                                                            codigoP));
+                salvar.save(false, "Vendas", nomeP,nomeCliente,nomeFunc,
+                                precoP,codigoP);
+                salvar.delete(true, "Produtos", idP);
 
+            }else 
+                JOptionPane.showMessageDialog(null,"Ops! Parece que o ID é inválido!");
+        }catch(Exception e){
+            System.out.println("Ops! Algo deu errado. Vendas: linha 303\nErro: " + e.getMessage());
+        }
+        
+        
 
     }//GEN-LAST:event_jToggleButtonSalvarActionPerformed
 
@@ -253,21 +314,30 @@ public class Vendas extends javax.swing.JInternalFrame {
     private void jToggleButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAtualizarActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
-        JOptionPane.showMessageDialog(null, atualizar.update(true, "Vendas", Long.parseLong(jTextFieldId.getText()),
+                                                                             ;
+
+        try{
+            JOptionPane.showMessageDialog(null, atualizar.update(true, "Vendas", Long.parseLong(jTextFieldIdVenda.getText()),
                                                                      jTextFieldProduto.getText(),
                                                                         jTextFieldCliente.getText(),
                                                                         jTextFieldFuncionario.getText(),
                                                                         jTextFieldCodigo.getText(), 
-                                                                        jTextFieldPreco.getText() ));                                                                      ;
+                                                                        jTextFieldPreco.getText() )); 
+           
+            atualizar.update(false, "Vendas", Long.parseLong(jTextFieldIdVenda.getText()),
+                                                                     jTextFieldProduto.getText(),
+                                                                        jTextFieldCliente.getText(),
+                                                                        jTextFieldFuncionario.getText(),
+                                                                        jTextFieldCodigo.getText(), 
+                                                                        jTextFieldPreco.getText() );                                                                      ;
 
+        }catch(Exception e){
+             
+                JOptionPane.showMessageDialog(null,"Ops! Algo deu errado. Vendas: linha 318\nErro: " + e.getMessage());
+
+        }
         
     }//GEN-LAST:event_jToggleButtonAtualizarActionPerformed
-
-    private void jToggleButtonRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonRelatorioActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jToggleButtonRelatorioActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -278,31 +348,36 @@ public class Vendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelIdCliente;
+    private javax.swing.JLabel jLabelIdFuncionario;
+    private javax.swing.JLabel jLabelIdProduto;
+    private javax.swing.JLabel jLabelIdVenda;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldCliente;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldFuncionario;
-    private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldIdCliente;
+    private javax.swing.JTextField jTextFieldIdFuncionario;
+    private javax.swing.JTextField jTextFieldIdProduto;
+    private javax.swing.JTextField jTextFieldIdVenda;
     private javax.swing.JTextField jTextFieldPreco;
     private javax.swing.JTextField jTextFieldProduto;
-    private javax.swing.JTextField jTextFieldQuantidade;
     private javax.swing.JToggleButton jToggleButtonAtualizar;
     private javax.swing.JToggleButton jToggleButtonCancelar;
-    private javax.swing.JToggleButton jToggleButtonRelatorio;
     private javax.swing.JToggleButton jToggleButtonSalvar;
     private java.util.List<Entidades.Vendas> vendasList;
     private java.util.List<Entidades.Vendas> vendasList1;
     private java.util.List<Entidades.Vendas> vendasList2;
     private java.util.List<Entidades.Vendas> vendasList3;
     private java.util.List<Entidades.Vendas> vendasList4;
+    private java.util.List<Entidades.Vendas> vendasList5;
     private javax.persistence.Query vendasQuery;
     private javax.persistence.Query vendasQuery1;
     private javax.persistence.Query vendasQuery2;
     private javax.persistence.Query vendasQuery3;
     private javax.persistence.Query vendasQuery4;
+    private javax.persistence.Query vendasQuery5;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

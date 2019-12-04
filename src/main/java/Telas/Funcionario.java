@@ -52,7 +52,6 @@ public class Funcionario extends javax.swing.JInternalFrame {
         jTextFieldId = new javax.swing.JTextField();
         jTextFieldUltimoNome = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
-        jFormattedTextFieldCel = new javax.swing.JFormattedTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -61,6 +60,7 @@ public class Funcionario extends javax.swing.JInternalFrame {
         jTextFieldNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTextFieldCel = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -79,15 +79,6 @@ public class Funcionario extends javax.swing.JInternalFrame {
         bindingGroup.addBinding(binding);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), jTextFieldEmail, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        try {
-            jFormattedTextFieldCel.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cel}"), jFormattedTextFieldCel, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
 
         jToggleButton1.setText("Salvar");
@@ -139,6 +130,15 @@ public class Funcionario extends javax.swing.JInternalFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTable1, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cel}"), jTextFieldCel, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jTextFieldCel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,10 +174,10 @@ public class Funcionario extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldUltimoNome)
-                            .addComponent(jFormattedTextFieldCel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldUltimoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCel))))
                 .addContainerGap(62, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,14 +198,14 @@ public class Funcionario extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jFormattedTextFieldCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jToggleButton2)
                     .addComponent(jToggleButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -227,13 +227,13 @@ public class Funcionario extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, salvar.save(true, "Funcionarios", jTextFieldNome.getText(), 
                                                                             jTextFieldUltimoNome.getText(), 
                                                                             jTextFieldEmail.getText(),
-                                                                            jFormattedTextFieldCel.getText(),
+                                                                            jTextFieldCel.getText(),
                                                                             null));
        
         salvar.save(false, "Funcionarios", jTextFieldNome.getText(), 
                                         jTextFieldUltimoNome.getText(), 
                                         jTextFieldEmail.getText(),
-                                        jFormattedTextFieldCel.getText(), 
+                                        jTextFieldCel.getText(), 
                                         null);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -244,20 +244,20 @@ public class Funcionario extends javax.swing.JInternalFrame {
                                                                                             jTextFieldNome.getText(), 
                                                                                             jTextFieldUltimoNome.getText(), 
                                                                                             jTextFieldEmail.getText(),
-                                                                                            jFormattedTextFieldCel.getText(), 
+                                                                                            jTextFieldCel.getText(), 
                                                                                             null));
         try{
           atualizar.update(false,"Funcionarios",Long.parseLong(jTextFieldId.getText()),
                   jTextFieldNome.getText(), 
                   jTextFieldUltimoNome.getText(), 
                   jTextFieldEmail.getText(),
-                  jFormattedTextFieldCel.getText(), 
+                  jTextFieldCel.getText(), 
                   null);          
         }catch(Exception e){
             atualizar.save(false, "Funcionarios", jTextFieldNome.getText(), 
                                                 jTextFieldUltimoNome.getText(), 
                                                 jTextFieldEmail.getText(),
-                                                jFormattedTextFieldCel.getText(), 
+                                                jTextFieldCel.getText(), 
                                                 null);
   
         }
@@ -265,6 +265,10 @@ public class Funcionario extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jTextFieldCelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -281,7 +285,6 @@ public class Funcionario extends javax.swing.JInternalFrame {
     private javax.persistence.Query funcionariosQuery3;
     private javax.persistence.Query funcionariosQuery4;
     private javax.persistence.Query funcionariosQuery5;
-    private javax.swing.JFormattedTextField jFormattedTextFieldCel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -290,6 +293,7 @@ public class Funcionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldCel;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNome;
