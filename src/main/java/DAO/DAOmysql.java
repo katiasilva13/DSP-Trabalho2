@@ -48,7 +48,7 @@ public class DAOmysql {
         Transaction transaction = null;
         Session session = HibernateMySql.getSessionFactory().openSession();
         try {
-    //        transaction.setTimeout(5);
+            //        transaction.setTimeout(5);
             //Start
             transaction = session.beginTransaction();
 

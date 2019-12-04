@@ -5,10 +5,8 @@
  */
 package Telas;
 
-
 import Gerenciar.CRUD;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -16,10 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class Cliente extends javax.swing.JInternalFrame {
 
-     public Cliente() {
+    public Cliente() {
         initComponents();
-     }
-    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -248,58 +246,57 @@ public class Cliente extends javax.swing.JInternalFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+
         CRUD salvar = new CRUD();
- 
-       JOptionPane.showMessageDialog(null, salvar.save(true, "Clientes", jTextFieldNome.getText(),
-                                                                    jTextFieldUltimoNome.getText(), 
-                                                                    jTextFieldEmail.getText(),
-                                                                    jTextFieldCel.getText(), 
-                                                                    jTextFieldCpf.getText()));
-       
-       salvar.save(false, "Clientes", jTextFieldNome.getText(),
-                                jTextFieldUltimoNome.getText(), 
-                                jTextFieldEmail.getText(),
-                                jTextFieldCel.getText(), 
-                                jTextFieldCpf.getText());
-       
+
+        JOptionPane.showMessageDialog(null, salvar.save(true, "Clientes", jTextFieldNome.getText(),
+                jTextFieldUltimoNome.getText(),
+                jTextFieldEmail.getText(),
+                jTextFieldCel.getText(),
+                jTextFieldCpf.getText()));
+
+        salvar.save(false, "Clientes", jTextFieldNome.getText(),
+                jTextFieldUltimoNome.getText(),
+                jTextFieldEmail.getText(),
+                jTextFieldCel.getText(),
+                jTextFieldCpf.getText());
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         CRUD delete = new CRUD();
-        JOptionPane.showMessageDialog(null, delete.delete(true,"Clientes",Long.parseLong(jTextFieldId.getText())));
+        JOptionPane.showMessageDialog(null, delete.delete(true, "Clientes", Long.parseLong(jTextFieldId.getText())));
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
-        JOptionPane.showMessageDialog(null, atualizar.update(true,"Clientes",Long.parseLong(jTextFieldId.getText()),
-                                                                            jTextFieldNome.getText(),
-                                                                            jTextFieldUltimoNome.getText(), 
-                                                                            jTextFieldEmail.getText(),
-                                                                            jTextFieldCel.getText(), 
-                                                                            jTextFieldCpf.getText()));
-        try{
-            atualizar.update(false,"Clientes",Long.parseLong(jTextFieldId.getText()),
-                                                        jTextFieldNome.getText(),
-                                                        jTextFieldUltimoNome.getText(), 
-                                                        jTextFieldEmail.getText(),
-                                                        jTextFieldCel.getText(), 
-                                                        jTextFieldCpf.getText());
-        }catch (Exception e){
-            atualizar.save(false, "Clientes", jTextFieldNome.getText(),
-                    jTextFieldUltimoNome.getText(), 
+
+        try {
+            JOptionPane.showMessageDialog(null, atualizar.update(true, "Clientes", Long.parseLong(jTextFieldId.getText()),
+                    jTextFieldNome.getText(),
+                    jTextFieldUltimoNome.getText(),
                     jTextFieldEmail.getText(),
-                    jTextFieldCel.getText(), 
+                    jTextFieldCel.getText(),
+                    jTextFieldCpf.getText()));
+            atualizar.update(false, "Clientes", Long.parseLong(jTextFieldId.getText()),
+                    jTextFieldNome.getText(),
+                    jTextFieldUltimoNome.getText(),
+                    jTextFieldEmail.getText(),
+                    jTextFieldCel.getText(),
                     jTextFieldCpf.getText());
-       
+        } catch (Exception e) {
+            atualizar.save(false, "Clientes", jTextFieldNome.getText(),
+                    jTextFieldUltimoNome.getText(),
+                    jTextFieldEmail.getText(),
+                    jTextFieldCel.getText(),
+                    jTextFieldCpf.getText());
+
         }
-        
-        
+
+
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
 

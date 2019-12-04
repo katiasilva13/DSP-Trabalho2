@@ -45,12 +45,11 @@ public class Vendas extends Entidades implements Serializable {
 
     @Column(name = "codigo")
     private String codigoProduto;
-    
 
     public Vendas() {
     }
 
-    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario, 
+    public Vendas(String nomeProduto, String nomeCliente, String nomeFuncionario,
             String precoProduto, String codigoProduto) {
         this.nomeProduto = nomeProduto;
         this.nomeCliente = nomeCliente;
@@ -58,7 +57,6 @@ public class Vendas extends Entidades implements Serializable {
         this.precoProduto = precoProduto;
         this.codigoProduto = codigoProduto;
     }
-  
 
     @Override
     public long getId() {
@@ -131,8 +129,6 @@ public class Vendas extends Entidades implements Serializable {
         this.codigoProduto = codigoProduto;
         changeSupport.firePropertyChange("codigoProduto", oldCodigoProduto, codigoProduto);
     }
-
-
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);

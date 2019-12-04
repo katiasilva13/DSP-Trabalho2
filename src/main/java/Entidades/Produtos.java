@@ -43,7 +43,6 @@ public class Produtos extends Entidades implements Serializable {
     @Column(name = "codigo")
     private String codigo;
 
-
     public Produtos() {
     }
 
@@ -114,8 +113,6 @@ public class Produtos extends Entidades implements Serializable {
         changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
     }
 
-    
-    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }

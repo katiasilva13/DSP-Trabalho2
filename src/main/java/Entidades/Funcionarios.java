@@ -113,7 +113,6 @@ public class Funcionarios extends Entidades implements Serializable {
         changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
-    
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
     }

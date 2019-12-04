@@ -5,8 +5,6 @@
  */
 package Telas;
 
-
-
 /**
  *
  * @author eriks
@@ -146,17 +144,17 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
@@ -182,11 +180,10 @@ public class Menu extends javax.swing.JFrame {
         Cliente cliente = new Cliente();
         jDesktopPane1.add(cliente);
         cliente.setVisible(true);
-        
+
 
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -223,10 +220,7 @@ public class Menu extends javax.swing.JFrame {
                 new Menu().setVisible(true);
             }
         });
-        
-        
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

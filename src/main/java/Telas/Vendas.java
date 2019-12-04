@@ -271,14 +271,14 @@ public class Vendas extends javax.swing.JInternalFrame {
     private void jToggleButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSalvarActionPerformed
         // TODO add your handling code here:
         CRUD salvar = new CRUD();
-        try{
+        try {
             boolean cliente, produto, func;
             cliente = salvar.checkID(true, "Clientes", Long.parseLong(jTextFieldIdCliente.getText()));
             func = salvar.checkID(true, "Fucnionarios", Long.parseLong(jTextFieldIdFuncionario.getText()));
             produto = salvar.checkID(true, "Produtos", Long.parseLong(jTextFieldIdProduto.getText()));
-            if(cliente && func && produto){
+            if (cliente && func && produto) {
                 DAOpostgres daoPsql = new DAOpostgres();
-                Clientes c = (Clientes) daoPsql.getByID("Clientes", Long.parseLong(jTextFieldIdCliente.getText()));                
+                Clientes c = (Clientes) daoPsql.getByID("Clientes", Long.parseLong(jTextFieldIdCliente.getText()));
                 String nomeCliente = c.getNome();
                 Funcionarios f = (Funcionarios) daoPsql.getByID("Funcionarios", Long.parseLong(jTextFieldIdFuncionario.getText()));
                 String nomeFunc = f.getNome();
@@ -287,23 +287,23 @@ public class Vendas extends javax.swing.JInternalFrame {
                 long idP = p.getId();
                 nomeP = p.getNome();
                 precoP = p.getPreco();
-                codigoP = p.getCodigo();      
+                codigoP = p.getCodigo();
                 JOptionPane.showMessageDialog(null, salvar.save(true, "Vendas", nomeP,
-                                                            nomeCliente,
-                                                            nomeFunc,
-                                                            precoP,
-                                                            codigoP));
-                salvar.save(false, "Vendas", nomeP,nomeCliente,nomeFunc,
-                                precoP,codigoP);
+                        nomeCliente,
+                        nomeFunc,
+                        precoP,
+                        codigoP));
+                salvar.save(false, "Vendas", nomeP, nomeCliente, nomeFunc,
+                        precoP, codigoP);
                 salvar.delete(true, "Produtos", idP);
 
-            }else 
-                JOptionPane.showMessageDialog(null,"Ops! Parece que o ID é inválido!");
-        }catch(Exception e){
-            System.out.println("Ops! Algo deu errado. Vendas: linha 303\nErro: " + e.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Ops! Parece que o ID é inválido!");
+            }
+        } catch (Exception e) {
+            System.out.println("Ops! Algo deu errado. Vendas: linha 304\nErro: " + e.getMessage());
         }
-        
-        
+
 
     }//GEN-LAST:event_jToggleButtonSalvarActionPerformed
 
@@ -314,32 +314,30 @@ public class Vendas extends javax.swing.JInternalFrame {
     private void jToggleButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAtualizarActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
-                                                                             ;
-
-        try{
+        try {
             JOptionPane.showMessageDialog(null, atualizar.update(true, "Vendas", Long.parseLong(jTextFieldIdVenda.getText()),
-                                                                     jTextFieldProduto.getText(),
-                                                                        jTextFieldCliente.getText(),
-                                                                        jTextFieldFuncionario.getText(),
-                                                                        jTextFieldCodigo.getText(), 
-                                                                        jTextFieldPreco.getText() )); 
-           
-            atualizar.update(false, "Vendas", Long.parseLong(jTextFieldIdVenda.getText()),
-                                                                     jTextFieldProduto.getText(),
-                                                                        jTextFieldCliente.getText(),
-                                                                        jTextFieldFuncionario.getText(),
-                                                                        jTextFieldCodigo.getText(), 
-                                                                        jTextFieldPreco.getText() );                                                                      ;
+                    jTextFieldProduto.getText(),
+                    jTextFieldCliente.getText(),
+                    jTextFieldFuncionario.getText(),
+                    jTextFieldCodigo.getText(),
+                    jTextFieldPreco.getText()));
 
-        }catch(Exception e){
-             
-                JOptionPane.showMessageDialog(null,"Ops! Algo deu errado. Vendas: linha 318\nErro: " + e.getMessage());
+            atualizar.update(false, "Vendas", Long.parseLong(jTextFieldIdVenda.getText()),
+                    jTextFieldProduto.getText(),
+                    jTextFieldCliente.getText(),
+                    jTextFieldFuncionario.getText(),
+                    jTextFieldCodigo.getText(),
+                    jTextFieldPreco.getText());;
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Ops! Algo deu errado. Vendas: linha 334\nErro: " + e.getMessage());
 
         }
-        
+
     }//GEN-LAST:event_jToggleButtonAtualizarActionPerformed
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;

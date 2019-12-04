@@ -5,7 +5,6 @@
  */
 package Telas;
 
-
 import Gerenciar.CRUD;
 import javax.swing.JOptionPane;
 
@@ -217,43 +216,43 @@ public class Produto extends javax.swing.JInternalFrame {
     private void jToggleButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAtualizarActionPerformed
         // TODO add your handling code here:
         CRUD atualizar = new CRUD();
-        JOptionPane.showMessageDialog(null, atualizar.update(true, "Produtos", Long.parseLong(jTextFieldId.getText()),
-                jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jTextFieldPreco.getText(), 
-                jTextFieldCodigo.getText(),null));
-        try{
-            atualizar.update(false, "Produtos", Long.parseLong(jTextFieldId.getText()), 
-                    jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),jTextFieldPreco.getText(), 
+        try {
+            JOptionPane.showMessageDialog(null, atualizar.update(true, "Produtos", Long.parseLong(jTextFieldId.getText()),
+                    jTextFieldProduto.getText(), jTextFieldFornecedor.getText(), jTextFieldPreco.getText(),
+                    jTextFieldCodigo.getText(), null));
+            atualizar.update(false, "Produtos", Long.parseLong(jTextFieldId.getText()),
+                    jTextFieldProduto.getText(), jTextFieldFornecedor.getText(), jTextFieldPreco.getText(),
                     jTextFieldCodigo.getText(), null);
-        }catch(Exception e){
-            atualizar.save(false,"Produtos",jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),
+        } catch (Exception e) {
+            atualizar.save(false, "Produtos", jTextFieldProduto.getText(), jTextFieldFornecedor.getText(),
                     jTextFieldPreco.getText(), jTextFieldCodigo.getText(), null);
         }
-              
+
     }//GEN-LAST:event_jToggleButtonAtualizarActionPerformed
 
     private void jToggleButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSalvarActionPerformed
         // TODO add your handling code here:
-        
+
         CRUD salvar = new CRUD();
-        JOptionPane.showMessageDialog(null, salvar.save(true,"Produtos",jTextFieldProduto.getText(), 
-                                                                        jTextFieldFornecedor.getText(),
-                                                                        jTextFieldPreco.getText(), 
-                                                                        jTextFieldCodigo.getText(), 
-                                                                        null));
-        
-        salvar.save(false,"Produtos",jTextFieldProduto.getText(), 
-                                    jTextFieldFornecedor.getText(),
-                                    jTextFieldPreco.getText(), 
-                                    jTextFieldCodigo.getText(),
-                                    null);
-        
+        JOptionPane.showMessageDialog(null, salvar.save(true, "Produtos", jTextFieldProduto.getText(),
+                jTextFieldFornecedor.getText(),
+                jTextFieldPreco.getText(),
+                jTextFieldCodigo.getText(),
+                null));
+
+        salvar.save(false, "Produtos", jTextFieldProduto.getText(),
+                jTextFieldFornecedor.getText(),
+                jTextFieldPreco.getText(),
+                jTextFieldCodigo.getText(),
+                null);
+
     }//GEN-LAST:event_jToggleButtonSalvarActionPerformed
 
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
         // TODO add your handling code here:
-        
+
         CRUD delete = new CRUD();
-        JOptionPane.showMessageDialog(null, delete.delete(true,"Produtos",Long.parseLong(jTextFieldId.getText())));
+        JOptionPane.showMessageDialog(null, delete.delete(true, "Produtos", Long.parseLong(jTextFieldId.getText())));
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
 

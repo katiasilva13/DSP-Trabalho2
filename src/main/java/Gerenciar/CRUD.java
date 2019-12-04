@@ -108,8 +108,7 @@ public class CRUD {
                         registro = "\nProduto: \nNome:" + p.getNome()
                                 + "\nSobrenome:" + p.getFornecedor()
                                 + "\nEmail:" + p.getPreco()
-                                + "\nCelular:" + p.getCodigo()
-                                + "\nQuantidade: " + p.getQuantidade();
+                                + "\nCelular:" + p.getCodigo();
                         break;
                     case "Vendas":
                         Vendas v;
@@ -118,11 +117,10 @@ public class CRUD {
                                 + "\nNome funcionario:" + v.getNomeFuncionario()
                                 + "\nNome produto:" + v.getNomeProduto()
                                 + "\nPreco produto:" + v.getPrecoProduto()
-                                + "\nCodigo produto:" + v.getCodigoProduto()
-                                + "\nQuantidade produto:" + v.getQuantidadeProduto();
+                                + "\nCodigo produto:" + v.getCodigoProduto();
                         break;
                     default:
-                        registro = "Ops! Algo deu errado. CRUD.getById: linha 125";
+                        registro = "Ops! Algo deu errado. CRUD.getById: linha 123";
                         break;
                 }
             } else {
@@ -134,7 +132,8 @@ public class CRUD {
                         registro = "\nCliente: \nNome:" + c.getNome()
                                 + "\nSobrenome:" + c.getUltimoNome()
                                 + "\nEmail:" + c.getEmail()
-                                + "\nCelular:" + c.getCel() + "\nCPF:" + c.getCpf();
+                                + "\nCelular:" + c.getCel() 
+                                + "\nCPF:" + c.getCpf();
                         break;
                     case "Funcionarios":
                         Funcionarios f;
@@ -150,8 +149,7 @@ public class CRUD {
                         registro = "\nProduto: \nNome:" + p.getNome()
                                 + "\nSobrenome:" + p.getFornecedor()
                                 + "\nEmail:" + p.getPreco()
-                                + "\nCelular:" + p.getCodigo()
-                                + "\nQuantidade:" + p.getQuantidade();
+                                + "\nCelular:" + p.getCodigo();
                         break;
                     case "Vendas":
                         Vendas v;
@@ -160,119 +158,25 @@ public class CRUD {
                                 + "\nNome funcionario:" + v.getNomeFuncionario()
                                 + "\nNome produto:" + v.getNomeProduto()
                                 + "\nPreco produto:" + v.getPrecoProduto()
-                                + "\nCodigo produto:" + v.getCodigoProduto()
-                                + "\nQuantidade produto:" + v.getQuantidadeProduto();
+                                + "\nCodigo produto:" + v.getCodigoProduto();
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado. CRUD.getById: linha 167");
+                        System.out.println("Ops! Algo deu errado. CRUD.getById: linha 164");
                         break;
                 }
             }
         } catch (Exception e) {
-            registro = "Ops! Algo deu errado. CRUD.getById: linha 172\nErro: " + e.getMessage();
+            registro = "Ops! Algo deu errado. CRUD.getById: linha 169\nErro: " + e.getMessage();
         }
         return registro;
 
     }
 
-    public void getAllTable(boolean dbAtual, String tabela) {
-        if (!dbAtual) {
-            DAOmysql daoMsql = new DAOmysql();
-            switch (tabela) {
-                case "Clientes":
-                    List<Entidades> listaC = daoMsql.getLista(tabela);
-                    for (int i = 0; i < listaC.size(); i++) {
-                        System.out.println("Lista  id: " + listaC.get(i).getId() + "\nNome: " + listaC.get(i).getNome()
-                                + "\nSobrenome: " + listaC.get(i).getUltimoNome()
-                                + "\nEmail:" + listaC.get(i).getEmail()
-                                + "\nCelular:" + listaC.get(i).getCel()
-                                + "\nCPF:" + listaC.get(i).getCpf());
-                    }
-                    break;
-                case "Funcionarios":
-                    List<Entidades> listaF = daoMsql.getLista(tabela);
-                    for (int i = 0; i < listaF.size(); i++) {
-                        System.out.println("Lista  id: " + listaF.get(i).getId() + "\nNome: " + listaF.get(i).getNome()
-                                + "\nSobrenome: " + listaF.get(i).getUltimoNome()
-                                + "\nEmail:" + listaF.get(i).getEmail()
-                                + "\nCelular:" + listaF.get(i).getCel());
-                    }
-                    break;
-                case "Produtos":
-                    List<Entidades> listaP = daoMsql.getLista(tabela);
-                    for (int i = 0; i < listaP.size(); i++) {
-                        System.out.println("Lista  id: " + listaP.get(i).getId() + "\nNome: " + listaP.get(i).getNome()
-                                + "\nFornecedor: " + listaP.get(i).getFornecedor()
-                                + "\nPreco:" + listaP.get(i).getPreco()
-                                + "\nCodigo:" + listaP.get(i).getCodigo()
-                                + "\nQuantidade:" + listaP.get(i).getQuantidade());
-                    }
-                    break;
-                case "Vendas":
-                    List<Entidades> listaV = daoMsql.getLista(tabela);
-                    for (int i = 0; i < listaV.size(); i++) {
-                        System.out.println("Lista  id: " + listaV.get(i).getId() + "\nNome cliente: " + listaV.get(i).getNomeCliente()
-                                + "\nNome funcionario: " + listaV.get(i).getNomeFuncionario()
-                                + "\nNome produto:" + listaV.get(i).getNomeProduto()
-                                + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
-                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto()
-                                + "\nQuantidade produto:" + listaV.get(i).getQuantidadeProduto());
-                    }
-                    break;
-            }
-        } else {
-            DAOpostgres daoPsql = new DAOpostgres();
-            switch (tabela) {
-                case "Clientes":
-                    List<Entidades> listaC = daoPsql.getLista(tabela);
-                    for (int i = 0; i < listaC.size(); i++) {
-                        System.out.println("Lista  id: " + listaC.get(i).getId() + "\nNome: " + listaC.get(i).getNome()
-                                + "\nSobrenome: " + listaC.get(i).getUltimoNome()
-                                + "\nEmail:" + listaC.get(i).getEmail()
-                                + "\nCelular:" + listaC.get(i).getCel()
-                                + "\nCPF:" + listaC.get(i).getCpf());
-                    }
-                    break;
-                case "Funcionarios":
-                    List<Entidades> listaF = daoPsql.getLista(tabela);
-                    for (int i = 0; i < listaF.size(); i++) {
-                        System.out.println("Lista  id: " + listaF.get(i).getId() + "\nNome: " + listaF.get(i).getNome()
-                                + "\nSobrenome: " + listaF.get(i).getUltimoNome()
-                                + "\nEmail:" + listaF.get(i).getEmail()
-                                + "\nCelular:" + listaF.get(i).getCel());
-                    }
-                    break;
-                case "Produtos":
-                    List<Entidades> listaP = daoPsql.getLista(tabela);
-                    for (int i = 0; i < listaP.size(); i++) {
-                        System.out.println("Lista  id: " + listaP.get(i).getId() + "\nNome: " + listaP.get(i).getNome()
-                                + "\nFornecedor: " + listaP.get(i).getFornecedor()
-                                + "\nPreco produto:" + listaP.get(i).getPreco()
-                                + "\nCodigo produto:" + listaP.get(i).getCodigo()
-                                + "\nQuantidade produto:" + listaP.get(i).getQuantidade());
-                    }
-                    break;
-                case "Vendas":
-                    List<Entidades> listaV = daoPsql.getLista(tabela);
-                    for (int i = 0; i < listaV.size(); i++) {
-                        System.out.println("Lista  id: " + listaV.get(i).getId() + "\nNome cliente: " + listaV.get(i).getNomeCliente()
-                                + "\nNome funcionario: " + listaV.get(i).getNomeFuncionario()
-                                + "\nNome produto:" + listaV.get(i).getNomeProduto()
-                                + "\nPreco produto:" + listaV.get(i).getPrecoProduto()
-                                + "\nCodigo produto:" + listaV.get(i).getCodigoProduto()
-                                + "\nQuantidade produto:" + listaV.get(i).getQuantidadeProduto());
-                    }
-                    break;
-            }
-        }
-
-    }
-
     public boolean checkID(boolean dbAtual, String tabela, long id) {
         boolean idCheck;
-        if ((getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 172\nErro: null"))
-                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 125"))
-                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 167")) ){
+        if ((getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 169\nErro: null"))
+                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 123"))
+                || (getByID(dbAtual, tabela, id).equalsIgnoreCase("Ops! Algo deu errado. CRUD.getById: linha 164"))) {
             idCheck = false;
         } else {
             idCheck = true;
@@ -286,7 +190,7 @@ public class CRUD {
 
         CRUD crud = new CRUD();
         if (!checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado. CRUD.update: linha289");
+            System.out.println("Ops! Algo deu errado. CRUD.update: linha 193");
         } else {
             try {
                 if (false == dbAtual) {
@@ -387,7 +291,7 @@ public class CRUD {
                 } else {
                     System.out.println("e is not null, toString is " + e + " and message is " + e.getMessage());
                 }
-                System.out.println("Ops! Algo deu errado. CRUD.update: linha 394\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.update: linha 294\nErro: " + e.getMessage());
             }
         }
         return "Atualizado";
@@ -486,12 +390,12 @@ public class CRUD {
                                 v.getPrecoProduto(), v.getCodigoProduto());
                         break;
                     default:
-                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 493");
+                        System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 393");
                         break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 498\nErro: " + e.getMessage());
+            System.out.println("Ops! Algo deu errado. CRUD.dbBackup: linha 398\nErro: " + e.getMessage());
         }
 
     }
@@ -499,13 +403,12 @@ public class CRUD {
     public String delete(boolean dbAtual, String tabela, long id) {
         CRUD crud = new CRUD();
         if (!crud.checkID(dbAtual, tabela, id)) {
-            System.out.println("Ops! Algo deu errado. CRUD.delete: linha 494");
+            System.out.println("Ops! Algo deu errado. CRUD.delete: linha 406");
         } else {
             try {
                 if (!dbAtual) {
                     DAOmysql daoMsql = new DAOmysql();
                     daoMsql.Delete(tabela, id);
-                    crud.getAllTable(dbAtual, tabela);
                 }
                 DAOpostgres daoPsql = new DAOpostgres();
                 switch (tabela) {
@@ -514,34 +417,30 @@ public class CRUD {
                         Clientes c = (Clientes) daoPsql.getByID(tabela, id);
                         dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
-                        crud.getAllTable(dbAtual, tabela);
                         break;
                     //Funcionario(nome, ultimoNome, email, cel);    
                     case "Funcionarios":
                         Funcionarios f = (Funcionarios) daoPsql.getByID(tabela, id);
                         dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
-                        crud.getAllTable(dbAtual, tabela);
                         break;
                     //Produto(nome, fornecedor, preco, codigo);
                     case "Produtos":
                         Produtos p = (Produtos) daoPsql.getByID(tabela, id);
                         dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
-                        crud.getAllTable(dbAtual, tabela);
                         break;
                     //Vendas(Produto.nome, Cliente.nome, Funcionário.nome, Produto.preco, Produto.codigo);    
                     case "Vendas":
                         Vendas v = (Vendas) daoPsql.getByID(tabela, id);
                         dbBackup(dbAtual, tabela);
                         daoPsql.Delete(tabela, id);
-                        crud.getAllTable(dbAtual, tabela);
                         break;
                     default:
                         System.out.println("Erro");
                 }
             } catch (Exception e) {
-                System.out.println("Ops! Algo deu errado. CRUD.delete: linha 537\nErro: " + e.getMessage());
+                System.out.println("Ops! Algo deu errado. CRUD.delete: linha 443\nErro: " + e.getMessage());
             }
         }
         return "Excluído com sucesso";
