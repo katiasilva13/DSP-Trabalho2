@@ -8,3 +8,7 @@ Quando o produto for vendido, devemos dropar o produto da tabela produtos. Criar
 Fazer uso de 3 Servidores de dados: Começar em: 1: MySQL 2: MongoDB 3: PostgreSQL
 
 README by VivianeEstevao
+Equipe:
+github.com/katiasilva13
+github.com/VivianeEstevao
+github.com/erikshenrique
