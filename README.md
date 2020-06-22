@@ -47,8 +47,8 @@ Quando o produto for vendido, devemos dropar o produto da tabela produtos.
 
 #### Equipe:
 
-github.com/katiasilva13  
+###### github.com/katiasilva13  
 
-github.com/VivianeEstevao/Trabalho-Persitencia-2  
+###### github.com/VivianeEstevao/Trabalho-Persitencia-2  
 
-github.com/erikshenrique  
+###### github.com/erikshenrique  
